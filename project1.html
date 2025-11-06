@@ -132,7 +132,7 @@
   <div id="gate" class="gate-backdrop" role="dialog" aria-modal="true" aria-labelledby="gate-title" style="background:#ffffff;">
     <div class="gate-panel">
       <h2 id="gate-title" class="gate-title">Protected Case Study</h2>
-      <p class="gate-sub">请输入密码查看内容 / Enter password to view.</p>
+      <p class="gate-sub">Enter password to view.</p>
       <form id="gate-form" class="gate-form" autocomplete="off">
         <input id="gate-input" class="gate-input" type="password" placeholder="Password" aria-label="Password" />
         <button class="gate-btn" type="submit">Unlock</button>
@@ -378,12 +378,20 @@
         error.textContent = '';
       }
 
-      // On load: hide page content (visually) behind the white overlay unless previously unlocked globally
+      // On load: check global unlock with 5-minute expiry
       (function initGate() {
         try {
-          // Global unlock across all project pages
-          if (localStorage.getItem('projects_unlocked') === 'true') {
-            revealContent();
+          const raw = localStorage.getItem('projects_unlocked');
+          if (raw) {
+            const data = JSON.parse(raw);
+            const now = Date.now();
+            if (data && typeof data.expires === 'number' && now < data.expires) {
+              // still valid
+              revealContent();
+            } else {
+              // expired -> remove flag and keep gate visible
+              localStorage.removeItem('projects_unlocked');
+            }
           }
         } catch (e) { /* ignore storage errors */ }
       })();
@@ -394,11 +402,15 @@
         if (val === PASSWORD) {
           revealContent();
           try {
-            // Set a global flag so all project pages recognize unlock
-            localStorage.setItem('projects_unlocked', 'true');
+            // Set a global flag with 5-minute expiry so all project pages recognize unlock
+            const FIVE_MIN = 5 * 60 * 1000;
+            localStorage.setItem('projects_unlocked', JSON.stringify({
+              token: 'ok',
+              expires: Date.now() + FIVE_MIN
+            }));
           } catch (e) {}
         } else {
-          error.textContent = '密码错误 / Incorrect password';
+          error.textContent = 'Incorrect password';
           input.focus();
           input.select();
         }
