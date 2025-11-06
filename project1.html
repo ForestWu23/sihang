@@ -3,99 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Checkout UX Revamp — Case Study • Sihang Yang (Protected)</title>
-  <meta name="description" content="A UX/UI case study focused on research-driven checkout improvements: discovery, IA, user flows, wireframes, usability testing, accessibility, and outcomes." />
+  <title>Green Apple Art Center — Case Study • Sihang Yang</title>
+  <meta name="description" content="UX/UI case study for Green Apple Art Center: brand cohesion, student portal, and event booking flow redesign with research, IA, wireframes, and outcomes." />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Font Awesome -->
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
-    :root {
-      --primary-color: #2563eb;
-      --secondary-color: #1e40af;
-      --accent-color: #f59e0b;
-      --text-primary: #111827;
-      --text-secondary: #4b5563;
-      --text-light: #9ca3af;
-      --bg-primary: #ffffff;
-      --bg-secondary: #f9fafb;
-      --bg-dark: #0b1220;
-      --border-color: #e5e7eb;
-      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-      --radius-xl: 20px;
-      --content: 1100px;
+    :root{
+      --primary-color:#2563eb;--secondary-color:#1e40af;--accent-color:#f59e0b;--text-primary:#111827;--text-secondary:#4b5563;--text-light:#9ca3af;--bg-primary:#fff;--bg-secondary:#f9fafb;--border-color:#e5e7eb;--shadow-sm:0 1px 2px 0 rgb(0 0 0 / .05);--shadow-md:0 4px 6px -1px rgb(0 0 0 / .1),0 2px 4px -2px rgb(0 0 0 / .1);--shadow-lg:0 10px 15px -3px rgb(0 0 0 / .1),0 4px 6px -4px rgb(0 0 0 / .1);--radius-xl:20px;
     }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6;color:var(--text-primary);background:var(--bg-primary)}
+    .container{max-width:1200px;margin:0 auto;padding:0 2rem}
 
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { margin: 0; font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: var(--text-primary); background: var(--bg-primary); line-height: 1.6; }
+    /* HEADER / NAV */
+    .navbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-color)}
+    .nav-inner{height:72px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;color:var(--text-primary);text-decoration:none}
+    .nav-menu{display:flex;gap:1.25rem;list-style:none;margin:0;padding:0}
+    .nav-menu a{position:relative;text-decoration:none;color:var(--text-secondary);font-weight:700}
+    .nav-menu a:hover,.nav-menu a.active{color:var(--primary-color)}
+    .nav-menu a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--primary-color);transition:width .2s ease}
+    .nav-menu a:hover::after,.nav-menu a.active::after{width:100%}
+    .mobile-toggle{display:none;background:none;border:0;font-size:1.5rem;cursor:pointer;color:var(--text-primary)}
 
-    .container { max-width: var(--content); margin: 0 auto; padding: 0 2rem; }
+    /* HERO */
+    .hero{padding:96px 0 28px;background:linear-gradient(135deg,rgba(37,99,235,.05),rgba(245,158,11,.05))}
+    h1{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,3rem);margin:0 0 .5rem}
+    .lead{font-size:1.125rem;color:var(--text-secondary);margin:0}
 
-    /* Header */
-    .navbar { position: sticky; top: 0; background: rgba(255,255,255,.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); z-index: 50; }
-    .nav-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; }
-    .logo { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.4rem; color: var(--text-primary); text-decoration: none; }
-    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .6rem 1rem; border-radius: 999px; border: 2px solid var(--border-color); background: var(--bg-primary); color: var(--text-primary); text-decoration: none; font-weight: 700; }
-    .btn:hover { border-color: var(--primary-color); color: var(--primary-color); box-shadow: var(--shadow-sm); }
-    .btn.primary { background: var(--primary-color); color: #fff; border-color: var(--primary-color); }
-    .btn.primary:hover { background: var(--secondary-color); border-color: var(--secondary-color); }
+    .meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.25rem}
+    .meta{background:var(--bg-primary);border:1px solid var(--border-color);border-radius:12px;box-shadow:var(--shadow-sm);padding:1rem}
+    .meta .label{font-size:.8rem;color:var(--text-light);font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+    .meta .value{font-weight:900;margin-top:.25rem}
 
-    /* Hero */
-    .hero { padding: 64px 0 28px; background: linear-gradient(135deg, rgba(37,99,235,.05), rgba(245,158,11,.05)); }
-    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 3rem); margin: 0 0 .5rem; }
-    .lead { color: var(--text-secondary); max-width: 75ch; margin: 0; }
-    .meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1rem; }
-    .meta { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem; box-shadow: var(--shadow-sm); }
-    .meta .label { font-size: .8rem; color: var(--text-light); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-    .meta .value { font-weight: 800; margin-top: .25rem; }
+    .hero-gallery{display:grid;grid-template-columns:2fr 1fr;gap:1rem;margin:28px 0 8px}
+    .hero-gallery img{width:100%;height:100%;object-fit:cover;border-radius:16px;box-shadow:var(--shadow-md)}
+    .stack{display:grid;grid-template-rows:1fr 1fr;gap:1rem}
 
-    /* Sections */
-    .section { padding: 56px 0; }
-    .section.alt { background: var(--bg-secondary); }
-    .section h2 { font-family: 'Playfair Display', serif; font-size: 1.75rem; margin: 0 0 .75rem; }
-    .two-col { display: grid; grid-template-columns: 1.1fr .9fr; gap: 2rem; align-items: start; }
-    .panel { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.25rem 1.25rem; box-shadow: var(--shadow-sm); }
-    .callout { border-left: 4px solid var(--accent-color); background: #fff7ed; color: #7c2d12; padding: 1rem 1.25rem; border-radius: 8px; }
+    /* SECTIONS */
+    .section{padding:64px 0}
+    .section.alt{background:var(--bg-secondary)}
+    .section h2{font-family:'Playfair Display',serif;font-size:1.75rem;margin:0 0 .75rem}
+    .two-col{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:start}
+    .panel{background:var(--bg-primary);border:1px solid var(--border-color);border-radius:16px;box-shadow:var(--shadow-sm);padding:1.25rem}
 
-    /* Gallery / Images */
-    figure { margin: 0; }
-    .hero-gallery { display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; margin: 24px 0 8px; }
-    .hero-gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; box-shadow: var(--shadow-md); }
-    .stack { display: grid; grid-template-rows: 1fr 1fr; gap: 1rem; }
-    .caption { font-size: .9rem; color: var(--text-light); margin-top: .4rem; }
+    .callout{border-left:4px solid var(--accent-color);background:#fff7ed;color:#7c2d12;padding:1rem 1.25rem;border-radius:8px}
 
-    .img-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-    .img-row img { width: 100%; border-radius: 14px; box-shadow: var(--shadow-sm); }
+    .img-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:24px 0}
+    .img-row img{width:100%;border-radius:14px;box-shadow:var(--shadow-sm)}
 
-    /* IA & flows */
-    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-    .card { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 16px; padding: 1rem 1.25rem; box-shadow: var(--shadow-sm); }
-    .kpi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
-    .kpi .num { font-weight: 900; font-size: 1.75rem; color: var(--primary-color); }
-    .kpi .cap { color: var(--text-secondary); font-weight: 600; }
+    .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
+    .kpi .card{background:var(--bg-primary);border:1px solid var(--border-color);border-radius:16px;box-shadow:var(--shadow-sm);padding:1.25rem;text-align:center}
+    .kpi .num{font-weight:900;font-size:1.75rem;color:var(--primary-color)}
+    .kpi .cap{color:var(--text-secondary)}
 
-    /* Responsive */
-    @media (max-width: 980px) {
-      .meta-grid { grid-template-columns: repeat(2, 1fr); }
-      .hero-gallery { grid-template-columns: 1fr; }
-      .two-col { grid-template-columns: 1fr; }
-      .cards { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 640px) {
-      .img-row, .kpi { grid-template-columns: 1fr; }
-    }
+    .cta{margin-top:1.25rem;display:flex;gap:.75rem;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.1rem;border-radius:999px;border:2px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);font-weight:800;text-decoration:none}
+    .btn:hover{border-color:var(--primary-color);color:var(--primary-color);box-shadow:var(--shadow-sm)}
+    .btn.primary{background:var(--primary-color);border-color:var(--primary-color);color:#fff}
+    .btn.primary:hover{background:var(--secondary-color);border-color:var(--secondary-color)}
+
+    /* RESPONSIVE */
+    @media (max-width:980px){.meta-grid{grid-template-columns:repeat(2,1fr)}.hero-gallery{grid-template-columns:1fr}.two-col{grid-template-columns:1fr}.img-row{grid-template-columns:1fr 1fr}}
+    @media (max-width:680px){.mobile-toggle{display:inline-grid;place-items:center}.nav-menu{position:fixed;inset:72px 0 auto 0;height:calc(100vh - 72px);background:var(--bg-primary);transform:translateX(100%);transition:transform .2s ease;box-shadow:var(--shadow-lg);flex-direction:column;align-items:flex-start;padding:1.25rem;gap:.75rem}.nav-menu.open{transform:translateX(0)}.img-row{grid-template-columns:1fr}}
   </style>
   <style>
-    /* Simple full-screen gate overlay */
+    /* Password gate overlay */
     .gate-backdrop {
       position: fixed; inset: 0;
       background: #ffffff; /* solid white so the password panel is visible */
@@ -109,6 +90,7 @@
       border-radius: 16px;
       box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.25), 0 8px 10px -6px rgb(0 0 0 / 0.2);
       padding: 24px 20px;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     }
     .gate-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin: 0 0 .25rem; color: #111827; }
     .gate-sub { color: #4b5563; margin: 0 0 1rem; }
@@ -129,9 +111,9 @@
 </head>
 <body>
   <!-- Password Gate -->
-  <div id="gate" class="gate-backdrop" role="dialog" aria-modal="true" aria-labelledby="gate-title" style="background:#ffffff;">
+  <div id="gate" class="gate-backdrop" role="dialog" aria-modal="true" aria-labelledby="gate-title">
     <div class="gate-panel">
-      <h2 id="gate-title" class="gate-title">Protected Project</h2>
+      <h2 id="gate-title" class="gate-title">Protected Case Study</h2>
       <p class="gate-sub">Enter password to view.</p>
       <form id="gate-form" class="gate-form" autocomplete="off">
         <input id="gate-input" class="gate-input" type="password" placeholder="Password" aria-label="Password" />
@@ -140,231 +122,177 @@
       <div id="gate-error" class="gate-error" aria-live="polite"></div>
     </div>
   </div>
-  <!-- Nav -->
-  <header class="navbar">
+  <!-- HEADER -->
+  <header class="navbar" id="navbar">
     <div class="container nav-inner">
       <a class="logo" href="index.html">Sihang Yang</a>
-      <nav class="nav-actions" aria-label="Page actions">
-        <a class="btn" href="#research"><i class="fa-solid fa-magnifying-glass-chart"></i> Research</a>
-        <a class="btn" href="#flows"><i class="fa-solid fa-diagram-project"></i> Flows</a>
-        <a class="btn primary" href="#results"><i class="fa-solid fa-star"></i> Results</a>
-      </nav>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+      <ul class="nav-menu" id="site-nav" role="menubar">
+        <li role="none"><a role="menuitem" href="index.html">Home</a></li>
+        <li role="none"><a role="menuitem" class="active" href="#overview">Project</a></li>
+        <li role="none"><a role="menuitem" href="#research">Research</a></li>
+        <li role="none"><a role="menuitem" href="#results">Results</a></li>
+      </ul>
     </div>
   </header>
 
-  <!-- Hero / Overview -->
+  <!-- HERO / OVERVIEW -->
   <section class="hero" id="overview">
     <div class="container">
-      <h1>Checkout UI/UX Revamp — Reducing Friction, Increasing Trust</h1>
-      <p class="lead">A research‑driven redesign of a multi‑step checkout for a mid‑market e‑commerce platform. I led the end‑to‑end UX process:
-        discovery, IA, user flows, wireframes, prototyping, usability testing, accessibility, and delivery.</p>
+      <h1>Green Apple Art Center — Brand & Experience Redesign</h1>
+      <p class="lead">A UI/UX redesign of Green Apple Art Center's digital experience: unified branding, a clearer student portal, and a streamlined booking flow for classes and events.</p>
 
       <div class="meta-grid" role="list">
         <div class="meta" role="listitem"><div class="label">Role</div><div class="value">Lead UX/UI Designer</div></div>
-        <div class="meta" role="listitem"><div class="label">Timeline</div><div class="value">10 weeks</div></div>
-        <div class="meta" role="listitem"><div class="label">Team</div><div class="value">PM, 3 FE, 1 BE, 1 DS, QA</div></div>
-        <div class="meta" role="listitem"><div class="label">Focus</div><div class="value">Checkout, Trust, Accessibility</div></div>
+        <div class="meta" role="listitem"><div class="label">Timeline</div><div class="value">14 weeks</div></div>
+        <div class="meta" role="listitem"><div class="label">Team</div><div class="value">PM • 2 Front‑end • Brand Strategist</div></div>
+        <div class="meta" role="listitem"><div class="label">Focus</div><div class="value">Brand • Student Portal • Booking UX</div></div>
       </div>
 
-      <!-- Hero gallery with captions -->
-      <div class="hero-gallery" aria-label="Context imagery">
-        <figure>
-          <img src="https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?q=80&w=1600&auto=format&fit=crop" alt="High‑fidelity screens laid out on a desk" />
-          <figcaption class="caption">High‑fidelity screens exploring trust markers and field hierarchy.</figcaption>
-        </figure>
+      <div class="hero-gallery" aria-label="Project visuals">
+        <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1600&auto=format&fit=crop" alt="Brand and UI compositions for Green Apple Art Center" />
         <div class="stack">
-          <figure>
-            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop" alt="Team workshop with sticky notes and journey mapping" />
-            <figcaption class="caption">Affinity mapping during discovery.</figcaption>
-          </figure>
-          <figure>
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop" alt="Notebook with wireframe sketches" />
-            <figcaption class="caption">Early wireframe explorations.</figcaption>
-          </figure>
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop" alt="Workshop and affinity mapping" />
+          <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1200&auto=format&fit=crop" alt="Design tokens and components" />
         </div>
       </div>
 
-      <div class="kpi" aria-label="Headline outcomes">
-        <div class="card"><div class="num">+21%</div><div class="cap">Checkout completion</div></div>
-        <div class="card"><div class="num">-34%</div><div class="cap">Form errors</div></div>
-        <div class="card"><div class="num">+9.3</div><div class="cap">SUS score</div></div>
+      <div class="kpi" aria-label="Key outcomes">
+        <div class="card"><div class="num">+38%</div><div class="cap">Completed registrations</div></div>
+        <div class="card"><div class="num">‑22%</div><div class="cap">Booking abandonment</div></div>
+        <div class="card"><div class="num">4.8★</div><div class="cap">Event satisfaction</div></div>
       </div>
     </div>
   </section>
 
-  <!-- Problem & Users -->
+  <!-- CHALLENGE & GOALS -->
   <section class="section">
     <div class="container two-col">
       <div class="panel">
-        <h2>The Problem</h2>
-        <p>Analytics revealed a 43% drop between shipping and payment. Recordings showed confusion around promo codes and address validation. Trust indicators were inconsistent across steps.</p>
-        <div class="callout" role="note"><strong>Constraint:</strong> Back‑end services required 3 steps; single‑page checkout was not feasible within the timeline.</div>
+        <h2>The Challenge</h2>
+        <p>Brand expression was inconsistent across channels and the student portal's IA made it hard to find the right class. Mobile users faced friction during booking, with unclear pricing and policy cues reducing trust.</p>
+        <div class="callout"><strong>Constraint:</strong> The legacy CMS and back‑end needed to remain, so the new UI had to integrate without large architectural changes.</div>
       </div>
       <div class="panel">
-        <h2>Users & Context</h2>
+        <h2>Goals</h2>
         <ul>
-          <li><strong>Guest buyers</strong> on mobile, time‑constrained, price‑sensitive.</li>
-          <li><strong>Returning buyers</strong> expecting saved addresses and one‑tap cards.</li>
-          <li>Edge cases: gift orders, different billing, PO boxes, cross‑border.</li>
+          <li>Unify brand across web, email, and on‑site materials.</li>
+          <li>Simplify the booking flow and clarify pricing/policies.</li>
+          <li>Improve discoverability in the student portal (search + filters).</li>
+          <li>Establish a scalable design system for future programs.</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- Research Insights -->
+  <!-- RESEARCH & INSIGHTS -->
   <section class="section alt" id="research">
     <div class="container">
-      <h2>Research & Key Insights</h2>
+      <h2>Research & Insights</h2>
       <div class="two-col">
         <div class="panel">
-          <p>We ran 10 moderated sessions and 3 rounds of unmoderated tests (n=48). Triangulated with GA funnels and 350 support tickets.</p>
+          <p>We ran interviews with students and parents (n=12), audited analytics, and reviewed 300+ support tickets. Themes:</p>
           <ul>
-            <li><strong>Trust signals:</strong> Users looked for consistent security badges and clear totals at every step.</li>
-            <li><strong>Field hierarchy:</strong> Optional fields and promo code timing affected perceived complexity.</li>
-            <li><strong>Error handling:</strong> Vague address errors stalled progress; inline guidance reduced retries.</li>
+            <li><strong>Trust markers:</strong> People wanted clear total cost and refund policy at each step.</li>
+            <li><strong>Findability:</strong> Users struggled to find age‑appropriate classes via the top nav.</li>
+            <li><strong>Mobile ergonomics:</strong> Dense forms and small touch targets increased abandon.</li>
           </ul>
         </div>
         <div class="panel">
           <div class="img-row" aria-label="Artifacts">
-            <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1200&auto=format&fit=crop" alt="Usability test in progress" />
-            <img src="https://images.unsplash.com/photo-1497493292307-31c376b6e479?q=80&w=1200&auto=format&fit=crop" alt="Notes and insights on a whiteboard" />
-            <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop" alt="Prototype screen on a phone" />
+            <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1200&auto=format&fit=crop" alt="Wireframe sketches and sitemap" />
+            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop" alt="Design system components on screen" />
+            <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1200&auto=format&fit=crop" alt="Low‑fi wireframes" />
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Strategy, IA & Flows -->
-  <section class="section" id="flows">
+  <!-- SOLUTION -->
+  <section class="section" id="solution">
     <div class="container">
-      <h2>UX Strategy, Information Architecture & Flows</h2>
-      <div class="cards" aria-label="Strategy cards">
-        <div class="card">
-          <h3>Principles</h3>
-          <ul>
-            <li>Reduce cognitive load with progressive disclosure.</li>
-            <li>Reinforce trust: totals + badges at every step.</li>
-            <li>Make errors recoverable and specific.</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Information Architecture</h3>
-          <p>Restructured checkout into <strong>Shipping → Payment → Review</strong> with a stable order summary rail and contextual help.</p>
-        </div>
-        <div class="card">
-          <h3>User Flows</h3>
-          <p>Edge cases mapped for promo codes, different billing, and gift messaging; added shortcuts for returning users.</p>
-        </div>
+      <h2>Design Solution</h2>
+      <div class="img-row">
+        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&auto=format&fit=crop" alt="Responsive UI mockups" />
+        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format&fit=crop" alt="Multi‑device class booking mockups" />
+        <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop" alt="Mobile UI prototype" />
       </div>
-
-      <figure style="margin-top:1rem">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop" alt="Flow diagram sketched on notebook" style="width:100%; border-radius:16px; box-shadow: var(--shadow-md)" />
-        <figcaption class="caption">Annotated user flow covering happy path and recoveries.</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- Wireframes & Prototype -->
-  <section class="section alt">
-    <div class="container two-col">
-      <div class="panel">
-        <h2>Wireframes</h2>
-        <p>Low‑fi to mid‑fi iterations validated field grouping, promo code timing, and progress feedback.</p>
-        <div class="img-row">
-          <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1200&auto=format&fit=crop" alt="Wireframe mockups on paper" />
-          <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop" alt="UI components for a design system" />
-          <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1200&auto=format&fit=crop" alt="Clickable prototype on a phone" />
+      <div class="two-col" style="margin-top:1rem">
+        <div class="panel">
+          <h3>Design System</h3>
+          <p>Introduced tokens for color/typography, a components library (cards, steps, alerts, inputs), and patterns for pricing, policies, and success states to reinforce trust.</p>
         </div>
-      </div>
-      <div class="panel">
-        <h2>Prototype</h2>
-        <ul>
-          <li>Interactive prototype in Figma with realistic validation and error states.</li>
-          <li>Content guidelines and microcopy for sensitive inputs.</li>
-          <li>Motion specs for step transitions (reduced‑motion compliant).</li>
-        </ul>
+        <div class="panel">
+          <h3>Booking Flow</h3>
+          <p>Reduced steps 8 → 5 with progressive disclosure, persistent order summary, and policy microcopy. Form fields resized and grouped for mobile ergonomics.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Usability Testing -->
-  <section class="section">
-    <div class="container two-col">
-      <div class="panel">
-        <h2>Usability Testing</h2>
-        <p>Two rounds (n=18) of task‑based tests measured time on task, error rate, and perceived effort (NASA‑TLX). Major findings:</p>
-        <ul>
-          <li>Moving promo field to Review step prevented abandon during Shipping.</li>
-          <li>Inline address suggestions reduced error loops by 34%.</li>
-          <li>Persistent order summary improved trust and price recall.</li>
-        </ul>
-      </div>
-      <div class="panel">
-        <h2>Accessibility</h2>
-        <ul>
-          <li>WCAG 2.2 AA: focus order, visible focus, labels/ARIA for fields, error relationships.</li>
-          <li>Color contrast ≥ 4.5:1 for text; ≥ 3:1 for large text/UI.</li>
-          <li>Escalated alternative for date inputs and CVV help.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Final UI & Results -->
+  <!-- RESULTS -->
   <section class="section alt" id="results">
     <div class="container">
-      <h2>Final UI & Outcomes</h2>
-      <div class="img-row" aria-label="Final UI mocks">
-        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&auto=format&fit=crop" alt="Checkout summary mock on a desk" />
-        <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1200&auto=format&fit=crop" alt="Payment screen high‑fidelity mock" />
-        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format&fit=crop" alt="Responsive checkout screens" />
-      </div>
-
-      <div class="kpi" style="margin-top:1rem">
-        <div class="card"><div class="num">+21%</div><div class="cap">Checkout completion</div></div>
-        <div class="card"><div class="num">-19s</div><div class="cap">Time on task (median)</div></div>
-        <div class="card"><div class="num">-35%</div><div class="cap">Support tickets (checkout)</div></div>
+      <h2>Results & Reflection</h2>
+      <div class="kpi">
+        <div class="card"><div class="num">+38%</div><div class="cap">Completed registrations</div></div>
+        <div class="card"><div class="num">‑22%</div><div class="cap">Booking abandonments</div></div>
+        <div class="card"><div class="num">3.2 pts</div><div class="cap">SUS score improvement</div></div>
       </div>
 
       <div class="two-col" style="margin-top:1rem">
         <div class="panel">
           <h3 style="margin-top:0">What Worked</h3>
           <ul>
-            <li>Progressive disclosure and clear step framing.</li>
-            <li>Specific, actionable error messages with examples.</li>
-            <li>Consistent trust components across steps.</li>
+            <li>Unified, scalable design system across touch‑points.</li>
+            <li>Transparent pricing and refund microcopy improved trust.</li>
+            <li>Mobile‑first forms reduced time on task and errors.</li>
           </ul>
         </div>
         <div class="panel">
           <h3 style="margin-top:0">Next Iterations</h3>
           <ul>
-            <li>Experiment with address auto‑complete providers for speed.</li>
-            <li>Introduce A/B for promo code entry vs. apply‑on‑review.</li>
-            <li>Offer express payment options on Shipping for returning users.</li>
+            <li>Personalized dashboards for students and guardians.</li>
+            <li>Event discovery with saved filters and recommendations.</li>
+            <li>Admin analytics for enrollments and capacity planning.</li>
           </ul>
         </div>
       </div>
 
-      <div class="container" style="padding-top:16px">
+      <div class="cta">
         <a class="btn primary" href="#overview"><i class="fa-solid fa-arrow-up"></i> Back to top</a>
-        <a class="btn" href="index.html" style="margin-left:.5rem"><i class="fa-solid fa-rectangle-list"></i> Back to Portfolio</a>
-        <a class="btn" href="mailto:sihang@example.com" style="margin-left:.5rem"><i class="fa-solid fa-envelope"></i> Get in touch</a>
+        <a class="btn" href="index.html"><i class="fa-solid fa-rectangle-list"></i> Back to Portfolio</a>
+        <a class="btn" href="mailto:sihang@example.com"><i class="fa-solid fa-envelope"></i> Get in touch</a>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer style="background: var(--bg-dark); color: #9ca3af;">
-    <div class="container" style="padding: 28px 0; text-align:center">
-      <p style="margin:0">© <span id="year"></span> Sihang Yang — Checkout UX Revamp</p>
+  <footer style="text-align:center;padding:28px 0;background:var(--bg-secondary);color:var(--text-light)">
+    <div class="container">
+      <p style="margin:0">© <span id="year"></span> Sihang Yang — Green Apple Art Center</p>
     </div>
   </footer>
 
   <script>
+    // Year stamp
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Client-side gate: password "sihang"
+    // Mobile menu
+    const toggle = document.getElementById('mobile-toggle');
+    const menu = document.getElementById('site-nav');
+    toggle?.addEventListener('click', () => {
+      const open = !menu.classList.contains('open');
+      menu.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      const icon = toggle.querySelector('i');
+      icon.classList.toggle('fa-bars', !open);
+      icon.classList.toggle('fa-xmark', open);
+    });
+  </script>
+  <script>
+    // Global 5-minute password gate shared across project pages (English only)
     (function() {
       const PASSWORD = 'sihang';
       const gate = document.getElementById('gate');
@@ -372,10 +300,9 @@
       const input = document.getElementById('gate-input');
       const error = document.getElementById('gate-error');
 
-      // Helper to reveal page content
       function revealContent() {
-        gate.classList.add('hidden');
-        error.textContent = '';
+        if (gate) gate.classList.add('hidden');
+        if (error) error.textContent = '';
       }
 
       // On load: check global unlock with 5-minute expiry
@@ -386,35 +313,33 @@
             const data = JSON.parse(raw);
             const now = Date.now();
             if (data && typeof data.expires === 'number' && now < data.expires) {
-              // still valid
               revealContent();
             } else {
-              // expired -> remove flag and keep gate visible
               localStorage.removeItem('projects_unlocked');
             }
           }
         } catch (e) { /* ignore storage errors */ }
       })();
 
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const val = (input.value || '').trim();
-        if (val === PASSWORD) {
-          revealContent();
-          try {
-            // Set a global flag with 5-minute expiry so all project pages recognize unlock
-            const FIVE_MIN = 5 * 60 * 1000;
-            localStorage.setItem('projects_unlocked', JSON.stringify({
-              token: 'ok',
-              expires: Date.now() + FIVE_MIN
-            }));
-          } catch (e) {}
-        } else {
-          error.textContent = 'Incorrect password';
-          input.focus();
-          input.select();
-        }
-      });
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const val = (input && input.value || '').trim();
+          if (val === PASSWORD) {
+            revealContent();
+            try {
+              const FIVE_MIN = 5 * 60 * 1000;
+              localStorage.setItem('projects_unlocked', JSON.stringify({
+                token: 'ok',
+                expires: Date.now() + FIVE_MIN
+              }));
+            } catch (e) {}
+          } else {
+            if (error) error.textContent = 'Incorrect password';
+            if (input) { input.focus(); input.select(); }
+          }
+        });
+      }
     })();
   </script>
 </body>

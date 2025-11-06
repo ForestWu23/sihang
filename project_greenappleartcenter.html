@@ -82,8 +82,53 @@
     @media (max-width:980px){ .meta-grid{grid-template-columns:repeat(2,1fr)} .hero-gallery{grid-template-columns:1fr} .two-col{grid-template-columns:1fr} .img-row{grid-template-columns:1fr 1fr} }
     @media (max-width:680px){ .mobile-toggle{display:inline-grid;place-items:center} .nav-menu{position:fixed;inset:72px 0 auto 0;height:calc(100vh - 72px);background:var(--bg-primary);transform:translateX(100%);transition:transform .2s ease;box-shadow:var(--shadow-lg);flex-direction:column;align-items:flex-start;padding:1.25rem;gap:.75rem} .nav-menu.open{transform:translateX(0)} .img-row{grid-template-columns:1fr} }
   </style>
+  <style>
+    /* Password gate overlay */
+    .gate-backdrop {
+      position: fixed; inset: 0;
+      background: #ffffff; /* solid white so the password panel is visible */
+      display: grid; place-items: center;
+      z-index: 9999;
+    }
+    .gate-panel {
+      width: min(520px, 92vw);
+      background: rgba(255,255,255,.92);
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.25), 0 8px 10px -6px rgb(0 0 0 / 0.2);
+      padding: 24px 20px;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+    .gate-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin: 0 0 .25rem; color: #111827; }
+    .gate-sub { color: #4b5563; margin: 0 0 1rem; }
+    .gate-form { display: grid; grid-template-columns: 1fr auto; gap: .75rem; }
+    .gate-input {
+      padding: .7rem .9rem; border-radius: 12px; border: 2px solid #e5e7eb;
+      font-size: 1rem;
+    }
+    .gate-input:focus { outline: none; border-color: #2563eb; }
+    .gate-btn {
+      appearance: none; border: none; border-radius: 12px;
+      background: #2563eb; color: #fff; font-weight: 700; padding: .7rem 1rem; cursor: pointer;
+    }
+    .gate-btn:hover { background: #1e40af; }
+    .gate-error { color: #b91c1c; font-weight: 600; min-height: 1.25rem; margin-top: .5rem; }
+    .hidden { display: none !important; }
+  </style>
 </head>
 <body>
+  <!-- Password Gate -->
+  <div id="gate" class="gate-backdrop" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+    <div class="gate-panel">
+      <h2 id="gate-title" class="gate-title">Protected Case Study</h2>
+      <p class="gate-sub">Enter password to view.</p>
+      <form id="gate-form" class="gate-form" autocomplete="off">
+        <input id="gate-input" class="gate-input" type="password" placeholder="Password" aria-label="Password" />
+        <button class="gate-btn" type="submit">Unlock</button>
+      </form>
+      <div id="gate-error" class="gate-error" aria-live="polite"></div>
+    </div>
+  </div>
   <!-- Header -->
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
@@ -251,6 +296,57 @@
       icon.classList.toggle('fa-bars', !open);
       icon.classList.toggle('fa-xmark', open);
     });
+  </script>
+  <script>
+    // Global 5-minute password gate shared across project pages
+    (function() {
+      const PASSWORD = 'sihang';
+      const gate = document.getElementById('gate');
+      const form = document.getElementById('gate-form');
+      const input = document.getElementById('gate-input');
+      const error = document.getElementById('gate-error');
+
+      function revealContent() {
+        if (gate) gate.classList.add('hidden');
+        if (error) error.textContent = '';
+      }
+
+      // On load: check global unlock with 5-minute expiry
+      (function initGate() {
+        try {
+          const raw = localStorage.getItem('projects_unlocked');
+          if (raw) {
+            const data = JSON.parse(raw);
+            const now = Date.now();
+            if (data && typeof data.expires === 'number' && now < data.expires) {
+              revealContent();
+            } else {
+              localStorage.removeItem('projects_unlocked');
+            }
+          }
+        } catch (e) { /* ignore storage errors */ }
+      })();
+
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const val = (input && input.value || '').trim();
+          if (val === PASSWORD) {
+            revealContent();
+            try {
+              const FIVE_MIN = 5 * 60 * 1000;
+              localStorage.setItem('projects_unlocked', JSON.stringify({
+                token: 'ok',
+                expires: Date.now() + FIVE_MIN
+              }));
+            } catch (e) {}
+          } else {
+            if (error) error.textContent = 'Incorrect password';
+            if (input) { input.focus(); input.select(); }
+          }
+        });
+      }
+    })();
   </script>
 </body>
 </html>
