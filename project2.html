@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Green Apple Art Center — Case Study • Sihang Yang</title>
+  <meta name="description" content="UX/UI case study for Green Apple Art Center: brand cohesion, student portal, and event booking flow redesign with research, IA, wireframes, and outcomes." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    :root{
+      --primary-color:#2563eb;--secondary-color:#1e40af;--accent-color:#f59e0b;--text-primary:#111827;--text-secondary:#4b5563;--text-light:#9ca3af;--bg-primary:#fff;--bg-secondary:#f9fafb;--border-color:#e5e7eb;--shadow-sm:0 1px 2px 0 rgb(0 0 0 / .05);--shadow-md:0 4px 6px -1px rgb(0 0 0 / .1),0 2px 4px -2px rgb(0 0 0 / .1);--shadow-lg:0 10px 15px -3px rgb(0 0 0 / .1),0 4px 6px -4px rgb(0 0 0 / .1);--radius-xl:20px;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6;color:var(--text-primary);background:var(--bg-primary)}
+    .container{max-width:1200px;margin:0 auto;padding:0 2rem}
+
+    /* HEADER / NAV */
+    .navbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-color)}
+    .nav-inner{height:72px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;color:var(--text-primary);text-decoration:none}
+    .nav-menu{display:flex;gap:1.25rem;list-style:none;margin:0;padding:0}
+    .nav-menu a{position:relative;text-decoration:none;color:var(--text-secondary);font-weight:700}
+    .nav-menu a:hover,.nav-menu a.active{color:var(--primary-color)}
+    .nav-menu a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--primary-color);transition:width .2s ease}
+    .nav-menu a:hover::after,.nav-menu a.active::after{width:100%}
+    .mobile-toggle{display:none;background:none;border:0;font-size:1.5rem;cursor:pointer;color:var(--text-primary)}
+
+    /* HERO */
+    .hero{padding:96px 0 28px;background:linear-gradient(135deg,rgba(37,99,235,.05),rgba(245,158,11,.05))}
+    h1{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,3rem);margin:0 0 .5rem}
+    .lead{font-size:1.125rem;color:var(--text-secondary);margin:0}
+
+    .meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.25rem}
+    .meta{background:var(--bg-primary);border:1px solid var(--border-color);border-radius:12px;box-shadow:var(--shadow-sm);padding:1rem}
+    .meta .label{font-size:.8rem;color:var(--text-light);font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+    .meta .value{font-weight:900;margin-top:.25rem}
+
+    .hero-gallery{display:grid;grid-template-columns:2fr 1fr;gap:1rem;margin:28px 0 8px}
+    .hero-gallery img{width:100%;height:100%;object-fit:cover;border-radius:16px;box-shadow:var(--shadow-md)}
+    .stack{display:grid;grid-template-rows:1fr 1fr;gap:1rem}
+
+    /* SECTIONS */
+    .section{padding:64px 0}
+    .section.alt{background:var(--bg-secondary)}
+    .section h2{font-family:'Playfair Display',serif;font-size:1.75rem;margin:0 0 .75rem}
+    .two-col{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:start}
+    .panel{background:var(--bg-primary);border:1px solid var(--border-color);border-radius:16px;box-shadow:var(--shadow-sm);padding:1.25rem}
+
+    .callout{border-left:4px solid var(--accent-color);background:#fff7ed;color:#7c2d12;padding:1rem 1.25rem;border-radius:8px}
+
+    .img-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:24px 0}
+    .img-row img{width:100%;border-radius:14px;box-shadow:var(--shadow-sm)}
+
+    .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
+    .kpi .card{background:var(--bg-primary);border:1px solid var(--border-color);border-radius:16px;box-shadow:var(--shadow-sm);padding:1.25rem;text-align:center}
+    .kpi .num{font-weight:900;font-size:1.75rem;color:var(--primary-color)}
+    .kpi .cap{color:var(--text-secondary)}
+
+    .cta{margin-top:1.25rem;display:flex;gap:.75rem;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.1rem;border-radius:999px;border:2px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);font-weight:800;text-decoration:none}
+    .btn:hover{border-color:var(--primary-color);color:var(--primary-color);box-shadow:var(--shadow-sm)}
+    .btn.primary{background:var(--primary-color);border-color:var(--primary-color);color:#fff}
+    .btn.primary:hover{background:var(--secondary-color);border-color:var(--secondary-color)}
+
+    /* RESPONSIVE */
+    @media (max-width:980px){.meta-grid{grid-template-columns:repeat(2,1fr)}.hero-gallery{grid-template-columns:1fr}.two-col{grid-template-columns:1fr}.img-row{grid-template-columns:1fr 1fr}}
+    @media (max-width:680px){.mobile-toggle{display:inline-grid;place-items:center}.nav-menu{position:fixed;inset:72px 0 auto 0;height:calc(100vh - 72px);background:var(--bg-primary);transform:translateX(100%);transition:transform .2s ease;box-shadow:var(--shadow-lg);flex-direction:column;align-items:flex-start;padding:1.25rem;gap:.75rem}.nav-menu.open{transform:translateX(0)}.img-row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a class="logo" href="index.html">Sihang Yang</a>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+      <ul class="nav-menu" id="site-nav" role="menubar">
+        <li role="none"><a role="menuitem" href="index.html">Home</a></li>
+        <li role="none"><a role="menuitem" class="active" href="#overview">Project</a></li>
+        <li role="none"><a role="menuitem" href="#research">Research</a></li>
+        <li role="none"><a role="menuitem" href="#results">Results</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO / OVERVIEW -->
+  <section class="hero" id="overview">
+    <div class="container">
+      <h1>Green Apple Art Center — Brand & Experience Redesign</h1>
+      <p class="lead">A UI/UX redesign of Green Apple Art Center's digital experience: unified branding, a clearer student portal, and a streamlined booking flow for classes and events.</p>
+
+      <div class="meta-grid" role="list">
+        <div class="meta" role="listitem"><div class="label">Role</div><div class="value">Lead UX/UI Designer</div></div>
+        <div class="meta" role="listitem"><div class="label">Timeline</div><div class="value">14 weeks</div></div>
+        <div class="meta" role="listitem"><div class="label">Team</div><div class="value">PM • 2 Front‑end • Brand Strategist</div></div>
+        <div class="meta" role="listitem"><div class="label">Focus</div><div class="value">Brand • Student Portal • Booking UX</div></div>
+      </div>
+
+      <div class="hero-gallery" aria-label="Project visuals">
+        <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1600&auto=format&fit=crop" alt="Brand and UI compositions for Green Apple Art Center" />
+        <div class="stack">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop" alt="Workshop and affinity mapping" />
+          <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1200&auto=format&fit=crop" alt="Design tokens and components" />
+        </div>
+      </div>
+
+      <div class="kpi" aria-label="Key outcomes">
+        <div class="card"><div class="num">+38%</div><div class="cap">Completed registrations</div></div>
+        <div class="card"><div class="num">‑22%</div><div class="cap">Booking abandonment</div></div>
+        <div class="card"><div class="num">4.8★</div><div class="cap">Event satisfaction</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHALLENGE & GOALS -->
+  <section class="section">
+    <div class="container two-col">
+      <div class="panel">
+        <h2>The Challenge</h2>
+        <p>Brand expression was inconsistent across channels and the student portal's IA made it hard to find the right class. Mobile users faced friction during booking, with unclear pricing and policy cues reducing trust.</p>
+        <div class="callout"><strong>Constraint:</strong> The legacy CMS and back‑end needed to remain, so the new UI had to integrate without large architectural changes.</div>
+      </div>
+      <div class="panel">
+        <h2>Goals</h2>
+        <ul>
+          <li>Unify brand across web, email, and on‑site materials.</li>
+          <li>Simplify the booking flow and clarify pricing/policies.</li>
+          <li>Improve discoverability in the student portal (search + filters).</li>
+          <li>Establish a scalable design system for future programs.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH & INSIGHTS -->
+  <section class="section alt" id="research">
+    <div class="container">
+      <h2>Research & Insights</h2>
+      <div class="two-col">
+        <div class="panel">
+          <p>We ran interviews with students and parents (n=12), audited analytics, and reviewed 300+ support tickets. Themes:</p>
+          <ul>
+            <li><strong>Trust markers:</strong> People wanted clear total cost and refund policy at each step.</li>
+            <li><strong>Findability:</strong> Users struggled to find age‑appropriate classes via the top nav.</li>
+            <li><strong>Mobile ergonomics:</strong> Dense forms and small touch targets increased abandon.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <div class="img-row" aria-label="Artifacts">
+            <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1200&auto=format&fit=crop" alt="Wireframe sketches and sitemap" />
+            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop" alt="Design system components on screen" />
+            <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1200&auto=format&fit=crop" alt="Low‑fi wireframes" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="section" id="solution">
+    <div class="container">
+      <h2>Design Solution</h2>
+      <div class="img-row">
+        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&auto=format&fit=crop" alt="Responsive UI mockups" />
+        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format&fit=crop" alt="Multi‑device class booking mockups" />
+        <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop" alt="Mobile UI prototype" />
+      </div>
+      <div class="two-col" style="margin-top:1rem">
+        <div class="panel">
+          <h3>Design System</h3>
+          <p>Introduced tokens for color/typography, a components library (cards, steps, alerts, inputs), and patterns for pricing, policies, and success states to reinforce trust.</p>
+        </div>
+        <div class="panel">
+          <h3>Booking Flow</h3>
+          <p>Reduced steps 8 → 5 with progressive disclosure, persistent order summary, and policy microcopy. Form fields resized and grouped for mobile ergonomics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="section alt" id="results">
+    <div class="container">
+      <h2>Results & Reflection</h2>
+      <div class="kpi">
+        <div class="card"><div class="num">+38%</div><div class="cap">Completed registrations</div></div>
+        <div class="card"><div class="num">‑22%</div><div class="cap">Booking abandonments</div></div>
+        <div class="card"><div class="num">3.2 pts</div><div class="cap">SUS score improvement</div></div>
+      </div>
+
+      <div class="two-col" style="margin-top:1rem">
+        <div class="panel">
+          <h3 style="margin-top:0">What Worked</h3>
+          <ul>
+            <li>Unified, scalable design system across touch‑points.</li>
+            <li>Transparent pricing and refund microcopy improved trust.</li>
+            <li>Mobile‑first forms reduced time on task and errors.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3 style="margin-top:0">Next Iterations</h3>
+          <ul>
+            <li>Personalized dashboards for students and guardians.</li>
+            <li>Event discovery with saved filters and recommendations.</li>
+            <li>Admin analytics for enrollments and capacity planning.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta">
+        <a class="btn primary" href="#overview"><i class="fa-solid fa-arrow-up"></i> Back to top</a>
+        <a class="btn" href="index.html"><i class="fa-solid fa-rectangle-list"></i> Back to Portfolio</a>
+        <a class="btn" href="mailto:sihang@example.com"><i class="fa-solid fa-envelope"></i> Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="text-align:center;padding:28px 0;background:var(--bg-secondary);color:var(--text-light)">
+    <div class="container">
+      <p style="margin:0">© <span id="year"></span> Sihang Yang — Green Apple Art Center</p>
+    </div>
+  </footer>
+
+  <script>
+    // Year stamp
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Mobile menu
+    const toggle = document.getElementById('mobile-toggle');
+    const menu = document.getElementById('site-nav');
+    toggle?.addEventListener('click', () => {
+      const open = !menu.classList.contains('open');
+      menu.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      const icon = toggle.querySelector('i');
+      icon.classList.toggle('fa-bars', !open);
+      icon.classList.toggle('fa-xmark', open);
+    });
+  </script>
+</body>
+</html>
