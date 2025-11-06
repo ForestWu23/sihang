@@ -330,15 +330,47 @@
     </div>
   </section>
 
-  <!-- About (stub for nav highlight demo) -->
-  <section id="about" class="section" aria-label="About me">
-    <div class="container">
-      <h2 class="section-title">About</h2>
-        <div class="section-sub" style="font-size:1.05rem; line-height:1.75; color: var(--text-secondary); display:grid; gap:1rem;">
-        <p>I’m Sihang Yang, an Interactive, UI/UX, and Graphic Designer driven by both logic and emotion — where strategy meets artistry. With experience spanning digital media, branding, and spatial design, I craft user-centered experiences that balance form, function, and sustainability.</p>
-        <p>My design philosophy blends purity and practicality: every visual decision serves purpose, every interface tells a story. From intuitive product flows to visually refined identities, I aim to create work that endures — aesthetically, emotionally, and ethically.</p>
-        <p>When I’m not designing, you’ll find me snowboarding down fresh powder or serving aces on the tennis court, always chasing balance between motion, mindfulness, and creativity.</p>
-      </div>    
+  <!-- About (artist-inspired styling) -->
+  <section id="about" class="section alt" aria-label="About me" style="position:relative; overflow:hidden; background:
+    radial-gradient(1200px 600px at 15% 10%, rgba(245,158,11,.25), transparent 60%),
+    radial-gradient(900px 500px at 85% 20%, rgba(37,99,235,.25), transparent 60%),
+    linear-gradient(135deg, rgba(37,99,235,.06), rgba(245,158,11,.06));">
+    <div class="container" style="position:relative; z-index:1;">
+      <h2 class="section-title" style="display:flex; align-items:center; gap:.6rem;">
+        <span>About</span>
+        <span aria-hidden="true" style="font-size:1.25rem; color: var(--accent-color)">✨</span>
+      </h2>
+
+      <div class="panel" style="background: rgba(255,255,255,.85); border: 1px solid var(--border-color); border-radius: 18px; box-shadow: var(--shadow-lg); padding: 1.5rem; backdrop-filter: blur(6px);">
+        <div class="section-sub" style="font-size:1.08rem; line-height:1.85; color: var(--text-secondary); display:grid; gap:1rem;">
+          <p style="margin:0;">
+            I’m Sihang Yang, an Interactive, UI/UX, and Graphic Designer driven by both logic and emotion — where strategy meets artistry.
+            With experience spanning digital media, branding, and spatial design, I craft user-centered experiences that balance form, function, and sustainability.
+          </p>
+          <p style="margin:0;">
+            My design philosophy blends purity and practicality: every visual decision serves purpose, every interface tells a story.
+            From intuitive product flows to visually refined identities, I aim to create work that endures — aesthetically, emotionally, and ethically.
+          </p>
+          <p style="margin:0;">
+            When I’m not designing, you’ll find me snowboarding down fresh powder or serving aces on the tennis court,
+            always chasing balance between motion, mindfulness, and creativity.
+          </p>
+        </div>
+
+        <!-- <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-top:1rem;">
+          <span style="background: rgba(37,99,235,.12); color: var(--primary-color); padding:.35rem .7rem; border-radius:999px; font-weight:700; font-size:.85rem;">UI/UX</span>
+          <span style="background: rgba(245,158,11,.12); color: var(--accent-color); padding:.35rem .7rem; border-radius:999px; font-weight:700; font-size:.85rem;">Branding</span>
+          <span style="background: rgba(30,64,175,.12); color: var(--secondary-color); padding:.35rem .7rem; border-radius:999px; font-weight:700; font-size:.85rem;">Spatial Design</span>
+          <span style="background: rgba(16,185,129,.12); color: #10b981; padding:.35rem .7rem; border-radius:999px; font-weight:700; font-size:.85rem;">Sustainability</span>
+        </div> -->
+      </div>
+
+      <!-- Painterly accents -->
+      <div aria-hidden="true" style="position:absolute; inset:auto 5% 8% auto; width:160px; height:160px; border-radius:50%;
+        background: conic-gradient(from 0deg, rgba(37,99,235,.25), rgba(245,158,11,.25), rgba(16,185,129,.25), rgba(37,99,235,.25));
+        filter: blur(12px); opacity:.45;"></div>
+      <div aria-hidden="true" style="position:absolute; inset:auto auto 12% 6%; width:220px; height:26px; border-radius:999px;
+        background: linear-gradient(90deg, rgba(37,99,235,.25), rgba(245,158,11,.25)); transform: rotate(-6deg); filter: blur(6px); opacity:.4;"></div>
     </div>
   </section>
 
