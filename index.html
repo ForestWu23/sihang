@@ -126,7 +126,7 @@
     .contact p { color: var(--text-secondary); font-size: 1.1rem; max-width: 800px; margin: 0 auto 1.5rem; }
 
     .social { display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; }
-    .social a { width: 48px; height: 48px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--primary-color); color: #fff; text-decoration: none; box-shadow: var(--shadow-sm); transition: transform .15s ease, background .15s ease, box-shadow .15s ease; }
+    .social a { width: 48px; height: 48px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: #f9f9f9; color: #fff; text-decoration: none; box-shadow: var(--shadow-sm); transition: transform .15s ease, background .15s ease, box-shadow .15s ease; }
     .social a:hover { background: var(--secondary-color); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
     /* Footer */
@@ -226,25 +226,39 @@
     </div>
   </section>
 
-  <!-- Portfolio -->
-  <section id="portfolio" class="section alt" aria-label="Featured work">
+  <!-- Portfolio (artist-inspired) -->
+  <section id="portfolio" class="section alt" aria-label="Featured work" style="position:relative; overflow:hidden;">
+    <!-- painterly accents -->
+    <div aria-hidden="true" style="position:absolute; inset:-80px -120px auto auto; width:360px; height:360px; border-radius:50%;
+      background: conic-gradient(from 0deg, rgba(37,99,235,.18), rgba(245,158,11,.18), rgba(16,185,129,.18), rgba(37,99,235,.18));
+      filter: blur(18px); opacity:.55;"></div>
+    <div aria-hidden="true" style="position:absolute; inset:auto auto -60px 4%; width:40%; height:28px; border-radius:999px;
+      background: linear-gradient(90deg, rgba(37,99,235,.18), rgba(245,158,11,.18)); transform: rotate(-4deg); filter: blur(6px); opacity:.35;"></div>
+
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">Featured Work</h2>
+        <h2 class="section-title" style="display:flex; align-items:center; gap:.6rem;">
+          <span>Featured Work</span>
+          <span aria-hidden="true" style="font-size:1.25rem; color: var(--accent-color)">🎭</span>
+        </h2>
         <p class="section-sub">A collection of projects that showcase my approach to solving complex design challenges across industries and platforms.</p>
       </div>
 
-      <div class="filters" role="toolbar" aria-label="Project filters">
+      <div class="filters" role="toolbar" aria-label="Project filters" style="position:relative;">
         <button class="filter-btn" data-filter="all" aria-pressed="true">All Projects</button>
         <button class="filter-btn" data-filter="featured">Featured</button>
         <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
         <button class="filter-btn" data-filter="web">Web Design</button>
         <button class="filter-btn" data-filter="saas">SaaS Products</button>
+        <!-- floating accent -->
+        <span aria-hidden="true" style="pointer-events:none; position:absolute; right:-8px; top:-18px; font-size:1.5rem; color: var(--primary-color); opacity:.35; animation: float 6s ease-in-out infinite;">✨</span>
       </div>
 
-      <div class="grid" id="projects">
+      <div class="grid" id="projects" style="perspective: 800px;">
         <a class="card" href="project1.html" data-category="featured mobile" aria-label="FinanceFlow: Personal Budgeting App">
-          <div class="thumb" aria-hidden="true"></div>
+          <div class="thumb" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&h=800&fit=crop&auto=format&dpr=2" alt="Project cover placeholder: finance dashboard" style="width:100%;height:100%;object-fit:cover;">
+          </div>
           <div class="card-body">
             <div class="tags">
               <span class="tag">Mobile App</span>
@@ -258,7 +272,9 @@
         </a>
 
         <a class="card" href="#" data-category="featured web saas" aria-label="DataViz Pro: Analytics Dashboard Redesign">
-          <div class="thumb" aria-hidden="true"></div>
+          <div class="thumb" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?w=1200&h=800&fit=crop&auto=format&dpr=2" alt="Project cover placeholder: analytics dashboard" style="width:100%;height:100%;object-fit:cover;">
+          </div>
           <div class="card-body">
             <div class="tags">
               <span class="tag">SaaS</span>
@@ -272,7 +288,9 @@
         </a>
 
         <a class="card" href="#" data-category="mobile" aria-label="MedConnect: Telemedicine Platform">
-          <div class="thumb" aria-hidden="true"></div>
+          <div class="thumb" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=1200&h=800&fit=crop&auto=format&dpr=2" alt="Project cover placeholder: mobile app UI" style="width:100%;height:100%;object-fit:cover;">
+          </div>
           <div class="card-body">
             <div class="tags">
               <span class="tag">Healthcare</span>
@@ -286,7 +304,9 @@
         </a>
 
         <a class="card" href="#" data-category="web saas" aria-label="ShopSmart: E‑commerce Optimization">
-          <div class="thumb" aria-hidden="true"></div>
+          <div class="thumb" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=800&fit=crop&auto=format&dpr=2" alt="Project cover placeholder: ecommerce optimization" style="width:100%;height:100%;object-fit:cover;">
+          </div>
           <div class="card-body">
             <div class="tags">
               <span class="tag">E‑commerce</span>
@@ -300,7 +320,9 @@
         </a>
 
         <a class="card" href="#" data-category="featured web" aria-label="LearnHub: Interactive Learning Platform">
-          <div class="thumb" aria-hidden="true"></div>
+          <div class="thumb" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=1200&h=800&fit=crop&auto=format&dpr=2" alt="Project cover placeholder: learning platform UI" style="width:100%;height:100%;object-fit:cover;">
+          </div>
           <div class="card-body">
             <div class="tags">
               <span class="tag">EdTech</span>
@@ -314,7 +336,9 @@
         </a>
 
         <a class="card" href="#" data-category="mobile" aria-label="Wanderlust: Travel Planning Companion">
-          <div class="thumb" aria-hidden="true"></div>
+          <div class="thumb" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=1200&h=800&fit=crop&auto=format&dpr=2" alt="Project cover placeholder: travel planning app" style="width:100%;height:100%;object-fit:cover;">
+          </div>
           <div class="card-body">
             <div class="tags">
               <span class="tag">Travel</span>
@@ -378,24 +402,26 @@
   <section id="contact" class="section contact" aria-label="Contact">
     <div class="container">
       <h2>Let's Create Something Amazing Together</h2>
+
+
       <p>I'm excited to work on new projects and collaborate with passionate teams. Whether you have a specific project in mind or just want to chat about design, I'd love to hear from you.</p>
+
+      <!-- Existing social links -->
       <div class="social" aria-label="Social links">
-        <a href="mailto:sihang@example.com" class="social-link" aria-label="Email">
-          <i class="fas fa-envelope" aria-hidden="true"></i>
+        <a href="index.html" class="social-link" aria-label="Homepage" title="Homepage">
+          <img src="photos/icons/home.png" alt="Home" style="width:24px; height:24px;">
         </a>
-        <a href="https://linkedin.com/in/sihangyang" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+        <a href="mailto:yangsh2569@gmail.com" class="social-link" aria-label="Email" title="Email">
+          <img src="photos/icons/email.png" alt="Email" style="width:24px; height:24px;">
         </a>
-        <a href="https://dribbble.com/sihangyang" target="_blank" rel="noopener" aria-label="Dribbble">
-          <i class="fab fa-dribbble" aria-hidden="true"></i>
+        <a href="https://www.linkedin.com/in/sihang-yang/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <img src="photos/icons/linkedin.png" alt="LinkedIn" style="width:24px; height:24px;">
         </a>
-        <a href="https://behance.net/sihangyang" target="_blank" rel="noopener" aria-label="Behance">
-          <i class="fab fa-behance" aria-hidden="true"></i>
-        </a>
-        <a href="https://twitter.com/sihangyang" target="_blank" rel="noopener" aria-label="Twitter">
-          <i class="fab fa-x-twitter" aria-hidden="true"></i>
+        <a href="tel:+12066852543" class="social-link" aria-label="Telephone" title="Telephone">
+          <img src="photos/icons/phone.png" alt="Phone" style="width:24px; height:24px;">
         </a>
       </div>
+
     </div>
   </section>
 
