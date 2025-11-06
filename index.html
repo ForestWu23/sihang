@@ -1,40 +1,459 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Forest Wu · Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sihang Yang – Product Designer</title>
+  <meta name="description" content="Product Designer specializing in UX/UI design, creating human-centered digital experiences that balance user needs and business goals." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome (fixed) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-pVrmQmQj8YbU+g0P2l4s+1h1E+J2AOUlYVdJd9o7Kkqf0Jw1c0t6m/2k2j3C7l9mWf8YV0fLby2QZbqFqU3X0w=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; text-align: center; background: #fafafa; }
-    header { padding: 40px 20px; }
-    h1 { font-size: 36px; margin-bottom: 10px; }
-    p.subtitle { color: #555; margin-top: 0; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 20px; max-width: 1000px; margin: auto; }
-    .card { background: white; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; }
-    .card img, iframe { width: 100%; height: auto; }
-    footer { margin-top: 40px; color: #888; padding-bottom: 30px; }
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #1e40af;
+      --accent-color: #f59e0b;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+      --text-light: #9ca3af;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f9fafb;
+      --bg-dark: #0b1220;
+      --border-color: #e5e7eb;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      --radius-xl: 20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+    }
+
+    /* Utilities */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+    /* Navbar */
+    .navbar { position: fixed; inset: 0 0 auto 0; background: rgba(255,255,255,.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); z-index: 1000; transition: box-shadow .2s ease; }
+    .navbar.scrolled { box-shadow: var(--shadow-md); }
+    .nav-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; text-decoration: none; color: var(--text-primary); }
+    .logo:hover { color: var(--primary-color); }
+
+    .nav-menu { display: flex; list-style: none; gap: 1.5rem; margin: 0; padding: 0; }
+    .nav-link { position: relative; text-decoration: none; color: var(--text-secondary); font-weight: 600; }
+    .nav-link:hover, .nav-link[aria-current="page"] { color: var(--primary-color); }
+    .nav-link::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 2px; background: var(--primary-color); transition: width .2s ease; }
+    .nav-link:hover::after, .nav-link[aria-current="page"]::after { width: 100%; }
+
+    .mobile-toggle { display: none; background: none; border: 0; font-size: 1.5rem; cursor: pointer; color: var(--text-primary); }
+
+    /* Hero */
+    .hero { min-height: 100vh; display: grid; place-items: center; padding: 120px 0 80px; background: linear-gradient(135deg, rgba(37,99,235,.05), rgba(245,158,11,.05)); }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.2; margin: 0 0 1rem; }
+    .hero .subtitle { font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 1.25rem; }
+
+    .hero .meta p { margin: .25rem 0; font-weight: 600; color: var(--text-secondary); }
+
+    .achievements { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; margin-top: 1.25rem; }
+    .achievement { display: flex; align-items: center; gap: .75rem; padding: 1rem; background: var(--bg-primary); border-radius: 12px; box-shadow: var(--shadow-sm); }
+    .achievement .icon { font-size: 1.25rem; color: var(--primary-color); }
+    .achievement .num { font-size: 1.5rem; font-weight: 800; color: var(--primary-color); }
+
+    .hero-media { position: relative; display: grid; place-items: center; }
+    .avatar { width: 300px; height: 300px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; border: 8px solid var(--bg-primary); box-shadow: var(--shadow-xl); }
+
+    .float { position: absolute; font-size: 1.75rem; color: var(--primary-color); opacity: .25; animation: float 6s ease-in-out infinite; }
+    .float.f1 { top: 10%; left: 8%; animation-delay: 0s; }
+    .float.f2 { top: 18%; right: 12%; animation-delay: 2s; }
+    .float.f3 { bottom: 14%; left: 16%; animation-delay: 4s; }
+
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+    /* Portfolio */
+    .section { padding: 96px 0; }
+    .section.alt { background: var(--bg-secondary); }
+    .section-header { text-align: center; margin-bottom: 2.5rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.75rem, 4vw, 3rem); margin: 0 0 .5rem; }
+    .section-sub { color: var(--text-secondary); max-width: 640px; margin: 0 auto; }
+
+    .filters { display: flex; justify-content: center; gap: .75rem; flex-wrap: wrap; margin: 2rem 0 2.5rem; }
+    .filter-btn { appearance: none; border-radius: 999px; padding: .7rem 1.25rem; border: 2px solid var(--border-color); background: var(--bg-primary); font-weight: 700; color: var(--text-secondary); cursor: pointer; transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease; }
+    .filter-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .filter-btn[aria-pressed="true"] { background: var(--primary-color); border-color: var(--primary-color); color: #fff; box-shadow: var(--shadow-md); }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+    .card { display: block; text-decoration: none; color: inherit; background: var(--bg-primary); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg); transition: transform .2s ease, box-shadow .2s ease; }
+    .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-xl); }
+
+    .thumb { height: 220px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); position: relative; }
+    .thumb::before { content: ""; position: absolute; inset: 0; background: radial-gradient(80px 80px at 50% 50%, rgba(255,255,255,.22), transparent 60%); filter: blur(6px); }
+    .thumb::after { content: "🎨"; position: absolute; inset: 0; display: grid; place-items: center; font-size: 1.75rem; color: #fff; opacity: .9; }
+
+    .card-body { padding: 1.5rem; }
+    .tags { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem; }
+    .tag { background: rgba(37,99,235,.1); color: var(--primary-color); padding: .25rem .6rem; border-radius: 999px; font-size: .8rem; font-weight: 700; }
+    .title { font-size: 1.25rem; font-weight: 800; line-height: 1.3; margin: .5rem 0 .4rem; }
+    .desc { color: var(--text-secondary); margin: 0 0 1rem; }
+    .link { display: inline-flex; align-items: center; gap: .5rem; color: var(--primary-color); font-weight: 700; }
+    .link i { transition: transform .2s ease; }
+    .card:hover .link i { transform: translateX(3px); }
+
+    /* Contact */
+    .contact { text-align: center; }
+    .contact h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.75rem, 4vw, 2.5rem); margin: 0 0 .5rem; }
+    .contact p { color: var(--text-secondary); font-size: 1.1rem; max-width: 800px; margin: 0 auto 1.5rem; }
+
+    .social { display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; }
+    .social a { width: 48px; height: 48px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--primary-color); color: #fff; text-decoration: none; box-shadow: var(--shadow-sm); transition: transform .15s ease, background .15s ease, box-shadow .15s ease; }
+    .social a:hover { background: var(--secondary-color); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+    /* Footer */
+    footer { background: var(--bg-dark); color: #e5e7eb; text-align: center; padding: 28px 0; }
+    footer p { margin: 0; color: #9ca3af; }
+
+    /* Motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+      .achievements { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .mobile-toggle { display: inline-grid; place-items: center; }
+      .nav-menu { position: fixed; inset: 72px 0 auto 0; height: calc(100vh - 72px); background: var(--bg-primary); transform: translateX(100%); transition: transform .2s ease; box-shadow: var(--shadow-lg); flex-direction: column; align-items: flex-start; padding: 1.25rem; gap: 1rem; }
+      .nav-menu.open { transform: translateX(0); }
+      .nav-link { padding: .25rem .5rem; }
+      .grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Forest Wu</h1>
-    <p class="subtitle">Designer · Visual / UI / Motion</p>
+  <!-- Header / Nav -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a class="logo" href="#home">Sihang Yang</a>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="nav-menu" aria-expanded="false">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+
+      <ul class="nav-menu" id="nav-menu" role="menubar">
+        <li role="none"><a class="nav-link" href="#home" role="menuitem" aria-current="page">Home</a></li>
+        <li role="none"><a class="nav-link" href="#portfolio" role="menuitem">Portfolio</a></li>
+        <li role="none"><a class="nav-link" href="#about" role="menuitem">About</a></li>
+        <li role="none"><a class="nav-link" href="#contact" role="menuitem">Contact</a></li>
+      </ul>
+    </div>
   </header>
 
-  <section class="grid">
-    <div class="card">
-      <img src="https://picsum.photos/800/500?random=1" alt="Project 1">
-      <p>作品一 · 项目简介</p>
-    </div>
-    <div class="card">
-      <img src="https://picsum.photos/800/500?random=2" alt="Project 2">
-      <p>作品二 · 项目简介</p>
-    </div>
-    <div class="card">
-      <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
-      <p>视频作品 · Demo</p>
+  <!-- Hero -->
+  <section id="home" class="hero" aria-label="Intro">
+    <div class="container hero-grid">
+      <div>
+        <h1>Hi, I'm Sihang Yang <span aria-hidden="true">👋</span></h1>
+        <p class="subtitle">I transform complex problems into elegant, user‑centered design solutions—creating digital experiences that delight users and drive business growth.</p>
+        <div class="meta" aria-label="Profile summary">
+          <p><strong>Senior Product Designer | 8+ years in UX/UI, SaaS, Mobile Apps</strong></p>
+          <p><strong>Design Systems • User Research • Prototyping • Strategy</strong></p>
+          <p><strong>Impact‑driven designer | Currently @ TechFlow • Ex–Google, Airbnb, Spotify</strong></p>
+        </div>
+
+        <div class="achievements" aria-label="Key achievements">
+          <div class="achievement" aria-label="12+ Design Awards">
+            <i class="fas fa-trophy icon" aria-hidden="true"></i>
+            <div>
+              <div class="num">12+</div>
+              <div>Design Awards</div>
+            </div>
+          </div>
+          <div class="achievement" aria-label="50+ Product Launches">
+            <i class="fas fa-rocket icon" aria-hidden="true"></i>
+            <div>
+              <div class="num">50+</div>
+              <div>Product Launches</div>
+            </div>
+          </div>
+          <div class="achievement" aria-label="2M+ Users Impacted">
+            <i class="fas fa-users icon" aria-hidden="true"></i>
+            <div>
+              <div class="num">2M+</div>
+              <div>Users Impacted</div>
+            </div>
+          </div>
+          <div class="achievement" aria-label="85% Conversion Boost">
+            <i class="fas fa-chart-line icon" aria-hidden="true"></i>
+            <div>
+              <div class="num">85%</div>
+              <div>Conversion Boost</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-media">
+        <img class="avatar" src="https://images.unsplash.com/photo-1494790108755-2616b612b5bc?w=600&h=600&fit=crop&crop=face" alt="Portrait of Sihang Yang" />
+        <div aria-hidden="true" class="float f1">🎨</div>
+        <div aria-hidden="true" class="float f2">💡</div>
+        <div aria-hidden="true" class="float f3">🚀</div>
+      </div>
     </div>
   </section>
 
-  <footer>© 2025 Forest Wu</footer>
+  <!-- Portfolio -->
+  <section id="portfolio" class="section alt" aria-label="Featured work">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Featured Work</h2>
+        <p class="section-sub">A collection of projects that showcase my approach to solving complex design challenges across industries and platforms.</p>
+      </div>
+
+      <div class="filters" role="toolbar" aria-label="Project filters">
+        <button class="filter-btn" data-filter="all" aria-pressed="true">All Projects</button>
+        <button class="filter-btn" data-filter="featured">Featured</button>
+        <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+        <button class="filter-btn" data-filter="web">Web Design</button>
+        <button class="filter-btn" data-filter="saas">SaaS Products</button>
+      </div>
+
+      <div class="grid" id="projects">
+        <a class="card" href="#" data-category="featured mobile" aria-label="FinanceFlow: Personal Budgeting App">
+          <div class="thumb" aria-hidden="true"></div>
+          <div class="card-body">
+            <div class="tags">
+              <span class="tag">Mobile App</span>
+              <span class="tag">UX Research</span>
+              <span class="tag">0→1</span>
+            </div>
+            <h3 class="title">FinanceFlow: Personal Budgeting App</h3>
+            <p class="desc">Designed a comprehensive personal finance app that helps users track expenses, set budgets, and achieve financial goals. Led the full design process from discovery to dev handoff.</p>
+            <span class="link">View Case Study <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+          </div>
+        </a>
+
+        <a class="card" href="#" data-category="featured web saas" aria-label="DataViz Pro: Analytics Dashboard Redesign">
+          <div class="thumb" aria-hidden="true"></div>
+          <div class="card-body">
+            <div class="tags">
+              <span class="tag">SaaS</span>
+              <span class="tag">B2B</span>
+              <span class="tag">Dashboard</span>
+            </div>
+            <h3 class="title">DataViz Pro: Analytics Dashboard Redesign</h3>
+            <p class="desc">Redesigned a complex analytics platform, improving engagement by 300% and reducing task time by 40%. Delivered a scalable design system adopted across 15+ products.</p>
+            <span class="link">View Case Study <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+          </div>
+        </a>
+
+        <a class="card" href="#" data-category="mobile" aria-label="MedConnect: Telemedicine Platform">
+          <div class="thumb" aria-hidden="true"></div>
+          <div class="card-body">
+            <div class="tags">
+              <span class="tag">Healthcare</span>
+              <span class="tag">Mobile</span>
+              <span class="tag">Accessibility</span>
+            </div>
+            <h3 class="title">MedConnect: Telemedicine Platform</h3>
+            <p class="desc">Accessible telemedicine app connecting patients and providers. Focused on inclusive design to serve users across abilities and age groups.</p>
+            <span class="link">View Case Study <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+          </div>
+        </a>
+
+        <a class="card" href="#" data-category="web saas" aria-label="ShopSmart: E‑commerce Optimization">
+          <div class="thumb" aria-hidden="true"></div>
+          <div class="card-body">
+            <div class="tags">
+              <span class="tag">E‑commerce</span>
+              <span class="tag">Conversion</span>
+              <span class="tag">A/B Testing</span>
+            </div>
+            <h3 class="title">ShopSmart: E‑commerce Optimization</h3>
+            <p class="desc">Led a checkout redesign resulting in a 45% conversion lift and ~$2M additional annual revenue.</p>
+            <span class="link">View Case Study <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+          </div>
+        </a>
+
+        <a class="card" href="#" data-category="featured web" aria-label="LearnHub: Interactive Learning Platform">
+          <div class="thumb" aria-hidden="true"></div>
+          <div class="card-body">
+            <div class="tags">
+              <span class="tag">EdTech</span>
+              <span class="tag">Learning</span>
+              <span class="tag">Gamification</span>
+            </div>
+            <h3 class="title">LearnHub: Interactive Learning Platform</h3>
+            <p class="desc">Engaging learning platform leveraging gamification and social features to increase completion rates by 60%.</p>
+            <span class="link">View Case Study <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+          </div>
+        </a>
+
+        <a class="card" href="#" data-category="mobile" aria-label="Wanderlust: Travel Planning Companion">
+          <div class="thumb" aria-hidden="true"></div>
+          <div class="card-body">
+            <div class="tags">
+              <span class="tag">Travel</span>
+              <span class="tag">Social</span>
+              <span class="tag">MVP</span>
+            </div>
+            <h3 class="title">Wanderlust: Travel Planning Companion</h3>
+            <p class="desc">Social travel planning app that helps users discover destinations, plan itineraries, and share experiences. Built from concept to MVP in 3 months.</p>
+            <span class="link">View Case Study <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About (stub for nav highlight demo) -->
+  <section id="about" class="section" aria-label="About me">
+    <div class="container">
+      <h2 class="section-title">About</h2>
+      <p class="section-sub">Short bio or additional content can go here.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section contact" aria-label="Contact">
+    <div class="container">
+      <h2>Let's Create Something Amazing Together</h2>
+      <p>I'm excited to work on new projects and collaborate with passionate teams. Whether you have a specific project in mind or just want to chat about design, I'd love to hear from you.</p>
+      <div class="social" aria-label="Social links">
+        <a href="mailto:sihang@example.com" class="social-link" aria-label="Email">
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+        </a>
+        <a href="https://linkedin.com/in/sihangyang" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+        </a>
+        <a href="https://dribbble.com/sihangyang" target="_blank" rel="noopener" aria-label="Dribbble">
+          <i class="fab fa-dribbble" aria-hidden="true"></i>
+        </a>
+        <a href="https://behance.net/sihangyang" target="_blank" rel="noopener" aria-label="Behance">
+          <i class="fab fa-behance" aria-hidden="true"></i>
+        </a>
+        <a href="https://twitter.com/sihangyang" target="_blank" rel="noopener" aria-label="Twitter">
+          <i class="fab fa-x-twitter" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer role="contentinfo">
+    <div class="container">
+      <p>© <span id="year"></span> Sihang Yang. All rights reserved. Designed and built with ❤️</p>
+    </div>
+  </footer>
+
+  <script>
+    // Helpers
+    const qs = (s, el = document) => el.querySelector(s);
+    const qsa = (s, el = document) => [...el.querySelectorAll(s)];
+
+    // Current year
+    qs('#year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle (accessibility + state sync)
+    const mobileToggle = qs('#mobile-toggle');
+    const navMenu = qs('#nav-menu');
+    mobileToggle.addEventListener('click', () => {
+      const open = navMenu.classList.toggle('open');
+      mobileToggle.setAttribute('aria-expanded', String(open));
+      const icon = mobileToggle.querySelector('i');
+      icon.classList.toggle('fa-bars', !open);
+      icon.classList.toggle('fa-xmark', open);
+    }, { passive: true });
+
+    // Close menu on link click (mobile)
+    qsa('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (navMenu.classList.contains('open')) {
+          navMenu.classList.remove('open');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+          const icon = mobileToggle.querySelector('i');
+          icon.classList.add('fa-bars');
+          icon.classList.remove('fa-xmark');
+        }
+      });
+    });
+
+    // Navbar scroll shadow
+    const navbar = qs('#navbar');
+    const onScroll = () => {
+      if (window.scrollY > 96) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+
+      // Active section highlight
+      const sections = qsa('section[id]');
+      const offset = 120; // header height
+      let current = '';
+      for (const section of sections) {
+        const top = section.offsetTop - offset - 1;
+        if (scrollY >= top) current = section.id;
+      }
+      qsa('.nav-link').forEach(a => {
+        if (a.getAttribute('href') === `#${current}`) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+    };
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Project filtering (aria-pressed state)
+    const filterBtns = qsa('.filter-btn');
+    const cards = qsa('.card');
+
+    function applyFilter(val) {
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-category') || '';
+        const show = (val === 'all') || cat.split(/\s+/).includes(val);
+        card.style.display = show ? 'block' : 'none';
+        card.style.opacity = show ? '1' : '0';
+        card.style.transform = show ? 'translateY(0)' : 'translateY(12px)';
+      });
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.setAttribute('aria-pressed', 'false'));
+        btn.setAttribute('aria-pressed', 'true');
+        applyFilter(btn.dataset.filter);
+      });
+    });
+
+    // Initialize default filter
+    applyFilter('all');
+
+    // Respect reduced motion (remove transforms)
+    const mediaReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mediaReduced.matches) {
+      qsa('*').forEach(el => el.style.transition = 'none');
+    }
+  </script>
 </body>
 </html>
