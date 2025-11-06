@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Green Apple Art Center — UX/UI Case Study • Sihang Yang</title>
+  <meta name="description" content="Full UX/UI case study for Green Apple Art Center using all project imagery: website IA, filters, store, mobile app, dashboard, and style guide." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #1e40af;
+      --accent-color: #f59e0b;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+      --text-light: #9ca3af;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f9fafb;
+      --border-color: #e5e7eb;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --radius-xl: 20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; line-height: 1.6; color: var(--text-primary); background: var(--bg-primary); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+    /* Header */
+    .navbar { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); }
+    .nav-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.4rem; color: var(--text-primary); text-decoration: none; }
+    .nav-menu { display: flex; gap: 1.25rem; list-style: none; margin: 0; padding: 0; }
+    .nav-menu a { position: relative; text-decoration: none; color: var(--text-secondary); font-weight: 700; }
+    .nav-menu a:hover, .nav-menu a.active { color: var(--primary-color); }
+    .nav-menu a::after { content: ''; position: absolute; left: 0; bottom: -6px; width: 0; height: 2px; background: var(--primary-color); transition: width .2s; }
+    .nav-menu a:hover::after, .nav-menu a.active::after { width: 100%; }
+    .mobile-toggle { display: none; background: none; border: 0; font-size: 1.5rem; cursor: pointer; color: var(--text-primary); }
+
+    /* Hero */
+    .hero { padding: 96px 0 28px; background: linear-gradient(135deg, rgba(37,99,235,.05), rgba(245,158,11,.05)); }
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.9rem, 4vw, 3rem); margin: 0 0 .5rem; }
+    .lead { font-size: 1.125rem; color: var(--text-secondary); margin: 0; }
+
+    .meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1.25rem; }
+    .meta { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: var(--shadow-sm); padding: 1rem; }
+    .meta .label { font-size: .8rem; color: var(--text-light); font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .meta .value { font-weight: 900; margin-top: .25rem; }
+
+    .hero-gallery { display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; margin: 28px 0 8px; }
+    .hero-gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; box-shadow: var(--shadow-md); }
+    .stack { display: grid; grid-template-rows: 1fr 1fr; gap: 1rem; }
+
+    /* Sections */
+    .section { padding: 64px 0; }
+    .section.alt { background: var(--bg-secondary); }
+    .section h2 { font-family: 'Playfair Display', serif; font-size: 1.75rem; margin: 0 0 .75rem; }
+    .two-col { display: grid; grid-template-columns: 1.1fr .9fr; gap: 2rem; align-items: start; }
+    .panel { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 16px; box-shadow: var(--shadow-sm); padding: 1.25rem; }
+
+    .img-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 24px 0; }
+    .img-row img { width: 100%; border-radius: 14px; box-shadow: var(--shadow-sm); }
+
+    .caption { font-size: .9rem; color: var(--text-light); margin-top: .35rem; }
+
+    .cta { margin-top: 1.25rem; display: flex; gap: .75rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1.1rem; border-radius: 999px; border: 2px solid var(--border-color); background: var(--bg-primary); color: var(--text-primary); font-weight: 800; text-decoration: none; }
+    .btn:hover { border-color: var(--primary-color); color: var(--primary-color); box-shadow: var(--shadow-sm); }
+    .btn.primary { background: var(--primary-color); border-color: var(--primary-color); color: #fff; }
+    .btn.primary:hover { background: var(--secondary-color); border-color: var(--secondary-color); }
+
+    /* Responsive */
+    @media (max-width:980px){ .meta-grid{grid-template-columns:repeat(2,1fr)} .hero-gallery{grid-template-columns:1fr} .two-col{grid-template-columns:1fr} .img-row{grid-template-columns:1fr 1fr} }
+    @media (max-width:680px){ .mobile-toggle{display:inline-grid;place-items:center} .nav-menu{position:fixed;inset:72px 0 auto 0;height:calc(100vh - 72px);background:var(--bg-primary);transform:translateX(100%);transition:transform .2s ease;box-shadow:var(--shadow-lg);flex-direction:column;align-items:flex-start;padding:1.25rem;gap:.75rem} .nav-menu.open{transform:translateX(0)} .img-row{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a class="logo" href="index.html">Sihang Yang</a>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+      <ul class="nav-menu" id="site-nav" role="menubar">
+        <li role="none"><a role="menuitem" href="index.html">Home</a></li>
+        <li role="none"><a role="menuitem" class="active" href="#overview">Project</a></li>
+        <li role="none"><a role="menuitem" href="#filters">Filters</a></li>
+        <li role="none"><a role="menuitem" href="#store">Store</a></li>
+        <li role="none"><a role="menuitem" href="#mobile">Mobile</a></li>
+        <li role="none"><a role="menuitem" href="#dashboard">Dashboard</a></li>
+        <li role="none"><a role="menuitem" href="#style">Style Guide</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero / Overview -->
+  <section class="hero" id="overview">
+    <div class="container">
+      <h1>Green Apple Art Center — Website & App UX Redesign</h1>
+      <p class="lead">Public site, store, mobile app, and student portal redesigned to improve discoverability, storytelling, and weekly clarity.</p>
+
+      <div class="meta-grid" role="list">
+        <div class="meta" role="listitem"><div class="label">Tools</div><div class="value">Adobe Illustrator • Photoshop • Figma</div></div>
+        <div class="meta" role="listitem"><div class="label">Duration</div><div class="value">3 months</div></div>
+        <div class="meta" role="listitem"><div class="label">My Role</div><div class="value">Product Designer</div></div>
+        <div class="meta" role="listitem"><div class="label">Scope</div><div class="value">Site IA • Filters • Store • Dashboard</div></div>
+      </div>
+
+      <div class="hero-gallery" aria-label="Project visuals">
+        <img src="https://static.wixstatic.com/media/1589e3_1391366f5a26426497f75e773e388ec3~mv2.jpg/v1/fit/w_759%2Ch_569%2Cq_90%2Cenc_avif%2Cquality_auto/1589e3_1391366f5a26426497f75e773e388ec3~mv2.jpg" alt="Homepage hero with filters" />
+        <div class="stack">
+          <img src="https://static.wixstatic.com/media/1589e3_4ebbea5041d84c6c9160597dbc094154~mv2.jpg/v1/fit/w_758%2Ch_569%2Cq_90%2Cenc_avif%2Cquality_auto/1589e3_4ebbea5041d84c6c9160597dbc094154~mv2.jpg" alt="Programs overview" />
+          <img src="https://static.wixstatic.com/media/1589e3_1c0bf0f6688c4d2fbc32f6cea65ca2da~mv2.jpg/v1/fit/w_758%2Ch_569%2Cq_90%2Cenc_avif%2Cquality_auto/1589e3_1c0bf0f6688c4d2fbc32f6cea65ca2da~mv2.jpg" alt="Store categories and filters" />
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <h2>About Project</h2>
+          <p>The Green Apple Art Center specializes in visual arts education with programs across portfolio preparation, architectural design, and fashion management. The redesign focused on making program discovery fast, improving store storytelling, and clarifying weekly tasks for students.</p>
+        </div>
+        <div class="panel">
+          <h2>Highlights</h2>
+          <ul>
+            <li>Integrated homepage filters: Student Level • Programs • Learning Mode.</li>
+            <li>Product story panel for persuasive content without layout clutter.</li>
+            <li>Student dashboard emphasizing weekly calendar and assignments.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filters -->
+  <section class="section alt" id="filters">
+    <div class="container">
+      <h2>Homepage Filters Integration</h2>
+      <div class="img-row">
+        <img src="https://static.wixstatic.com/media/1589e3_c0bce1b0379d4538be75c9cbffff6a3f~mv2.jpg/v1/fill/w_517%2Ch_414%2Cal_c%2Cq_80%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/1589e3_c0bce1b0379d4538be75c9cbffff6a3f~mv2.jpg" alt="Filter dropdowns" />
+        <img src="https://static.wixstatic.com/media/1589e3_1391366f5a26426497f75e773e388ec3~mv2.jpg/v1/fit/w_759%2Ch_569%2Cq_90%2Cenc_avif%2Cquality_auto/1589e3_1391366f5a26426497f75e773e388ec3~mv2.jpg" alt="Homepage hero with filters" />
+        <img src="https://static.wixstatic.com/media/1589e3_4ebbea5041d84c6c9160597dbc094154~mv2.jpg/v1/fit/w_758%2Ch_569%2Cq_90%2Cenc_avif%2Cquality_auto/1589e3_4ebbea5041d84c6c9160597dbc094154~mv2.jpg" alt="Programs page with filters" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Store -->
+  <section class="section" id="store">
+    <div class="container">
+      <h2>Store — Product Storytelling</h2>
+      <div class="two-col">
+        <div class="panel">
+          <p>On the product page, a slide‑in story block adds narrative and specs without breaking the gallery alignment. Users can toggle it using the arrow, keeping key details in view.</p>
+          <div class="img-row">
+            <img src="https://static.wixstatic.com/media/1589e3_bfa9680c84f44c37bb24acf210385103~mv2.jpg/v1/fit/w_758%2Ch_569%2Cq_90%2Cenc_avif%2Cquality_auto/1589e3_bfa9680c84f44c37bb24acf210385103~mv2.jpg" alt="Product page layout" />
+            <img src="https://static.wixstatic.com/media/1589e3_bfa9680c84f44c37bb24acf210385103~mv2.jpg/v1/fill/w_517%2Ch_388%2Cal_c%2Cq_80%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/1589e3_bfa9680c84f44c37bb24acf210385103~mv2.jpg" alt="Product page story panel open" />
+            <img src="https://static.wixstatic.com/media/1589e3_1c0bf0f6688c4d2fbc32f6cea65ca2da~mv2.jpg/v1/fit/w_758%2Ch_569%2Cq_90%2Cenc_avif%2Cquality_auto/1589e3_1c0bf0f6688c4d2fbc32f6cea65ca2da~mv2.jpg" alt="Store categories and filters" />
+          </div>
+        </div>
+        <div class="panel">
+          <img src="https://static.wixstatic.com/media/1589e3_4dd78f4318bb4371935d3b4bdef42a76~mv2.jpg/v1/crop/x_0%2Cy_0%2Cw_1050%2Ch_655/fill/w_431%2Ch_269%2Cal_c%2Cq_80%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/Product%20Page%20Individual%209_edited.jpg" alt="Product story overlay detail" style="width:100%;border-radius:16px;box-shadow:var(--shadow-md)" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile App -->
+  <section class="section alt" id="mobile">
+    <div class="container">
+      <h2>Mobile App Screens</h2>
+      <div class="img-row" aria-label="Mobile app screens">
+        <img src="https://static.wixstatic.com/media/1589e3_aabf29dcee4e4ddc9eb2c61a00b59635~mv2.png/v1/fill/w_354%2Ch_546%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/Artboard%2010%20copy%202.png" alt="Welcome and sign-in options" />
+        <img src="https://static.wixstatic.com/media/1589e3_bae5e858a0fc4f17b5735ddf3001d852~mv2.png/v1/fill/w_354%2Ch_546%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/Artboard%2010.png" alt="Home with today's class and to-dos" />
+        <img src="https://static.wixstatic.com/media/1589e3_f2503fe263dd4abd97d1d98fe334c3fc~mv2.png/v1/fill/w_354%2Ch_546%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/Artboard%2010%20copy.png" alt="Class detail and register" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard -->
+  <section class="section" id="dashboard">
+    <div class="container">
+      <h2>Student Dashboard</h2>
+      <div class="two-col">
+        <div class="panel">
+          <p>Weekly calendar replaces the full month, highlighting the next class day. Current Course and Assignments modules bring clarity to near‑term tasks with a path to “View All”.</p>
+        </div>
+        <div class="panel">
+          <img src="https://static.wixstatic.com/media/1589e3_ffe53aefa38843b1aa4ff2e195d11adf~mv2.jpg/v1/fill/w_517%2Ch_414%2Cal_c%2Cq_80%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/1589e3_ffe53aefa38843b1aa4ff2e195d11adf~mv2.jpg" alt="Dashboard weekly calendar and assignments" style="width:100%;border-radius:16px;box-shadow:var(--shadow-md)" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Student Showcase (bonus imagery) -->
+  <section class="section alt" id="showcase">
+    <div class="container">
+      <h2>Student Showcase Layout</h2>
+      <div class="img-row">
+        <img src="https://static.wixstatic.com/media/1589e3_4e1740b9bd0547368ec9e77f73954864~mv2.jpg/v1/fit/w_758%2Ch_569%2Cq_90%2Cenc_avif%2Cquality_auto/1589e3_4e1740b9bd0547368ec9e77f73954864~mv2.jpg" alt="Class detail page" />
+        <img src="https://static.wixstatic.com/media/1589e3_4ebbea5041d84c6c9160597dbc094154~mv2.jpg/v1/fit/w_758%2Ch_569%2Cq_90%2Cenc_avif%2Cquality_auto/1589e3_4ebbea5041d84c6c9160597dbc094154~mv2.jpg" alt="Programs overview" />
+        <img src="https://static.wixstatic.com/media/1589e3_4e1740b9bd0547368ec9e77f73954864~mv2.jpg/v1/fit/w_758%2Ch_569%2Cq_90%2Cenc_avif%2Cquality_auto/1589e3_4e1740b9bd0547368ec9e77f73954864~mv2.jpg" alt="Class schedule hero" />
+      </div>
+      <figure>
+        <img src="https://static.wixstatic.com/media/1589e3_4e1740b9bd0547368ec9e77f73954864~mv2.jpg/v1/fit/w_758%2Ch_569%2Cq_90%2Cenc_avif%2Cquality_auto/1589e3_4e1740b9bd0547368ec9e77f73954864~mv2.jpg" alt="Watercolor painting beginner layout" style="width:100%;border-radius:16px;box-shadow:var(--shadow-md)" />
+        <figcaption class="caption">Class detail page emphasizing schedule and price clarity.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Style Guide -->
+  <section class="section" id="style">
+    <div class="container">
+      <h2>Visual Style Guide</h2>
+      <figure>
+        <img src="https://static.wixstatic.com/media/1589e3_f6091183b83f457c9730d9a81b808bf2~mv2.png/v1/crop/x_0%2Cy_109%2Cw_1199%2Ch_918/fill/w_847%2Ch_649%2Cal_c%2Cq_90%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/Visual%20Style%20Guide.png" alt="Style guide: type, colors, buttons" style="width:100%;border-radius:16px;box-shadow:var(--shadow-md)" />
+        <figcaption class="caption">Typography, color palette, and button standards used across web and app.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <footer style="text-align:center;padding:28px 0;background:var(--bg-secondary);color:var(--text-light)">
+    <div class="container">
+      <p style="margin:0">© <span id="year"></span> Sihang Yang — Green Apple Art Center</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const toggle = document.getElementById('mobile-toggle');
+    const menu = document.getElementById('site-nav');
+    toggle?.addEventListener('click', () => {
+      const open = !menu.classList.contains('open');
+      menu.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      const icon = toggle.querySelector('i');
+      icon.classList.toggle('fa-bars', !open);
+      icon.classList.toggle('fa-xmark', open);
+    });
+  </script>
+</body>
+</html>
