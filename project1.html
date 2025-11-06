@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Checkout UX Revamp — Case Study • Sihang Yang</title>
+  <title>Checkout UX Revamp — Case Study • Sihang Yang (Protected)</title>
   <meta name="description" content="A UX/UI case study focused on research-driven checkout improvements: discovery, IA, user flows, wireframes, usability testing, accessibility, and outcomes." />
 
   <!-- Fonts -->
@@ -94,8 +94,52 @@
       .img-row, .kpi { grid-template-columns: 1fr; }
     }
   </style>
+  <style>
+    /* Simple full-screen gate overlay */
+    .gate-backdrop {
+      position: fixed; inset: 0;
+      background: #ffffff; /* solid white so the password panel is visible */
+      display: grid; place-items: center;
+      z-index: 9999;
+    }
+    .gate-panel {
+      width: min(520px, 92vw);
+      background: rgba(255,255,255,.92);
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.25), 0 8px 10px -6px rgb(0 0 0 / 0.2);
+      padding: 24px 20px;
+    }
+    .gate-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin: 0 0 .25rem; color: #111827; }
+    .gate-sub { color: #4b5563; margin: 0 0 1rem; }
+    .gate-form { display: grid; grid-template-columns: 1fr auto; gap: .75rem; }
+    .gate-input {
+      padding: .7rem .9rem; border-radius: 12px; border: 2px solid #e5e7eb;
+      font-size: 1rem;
+    }
+    .gate-input:focus { outline: none; border-color: #2563eb; }
+    .gate-btn {
+      appearance: none; border: none; border-radius: 12px;
+      background: #2563eb; color: #fff; font-weight: 700; padding: .7rem 1rem; cursor: pointer;
+    }
+    .gate-btn:hover { background: #1e40af; }
+    .gate-error { color: #b91c1c; font-weight: 600; min-height: 1.25rem; margin-top: .5rem; }
+    .hidden { display: none !important; }
+  </style>
 </head>
 <body>
+  <!-- Password Gate -->
+  <div id="gate" class="gate-backdrop" role="dialog" aria-modal="true" aria-labelledby="gate-title" style="background:#ffffff;">
+    <div class="gate-panel">
+      <h2 id="gate-title" class="gate-title">Protected Case Study</h2>
+      <p class="gate-sub">请输入密码查看内容 / Enter password to view.</p>
+      <form id="gate-form" class="gate-form" autocomplete="off">
+        <input id="gate-input" class="gate-input" type="password" placeholder="Password" aria-label="Password" />
+        <button class="gate-btn" type="submit">Unlock</button>
+      </form>
+      <div id="gate-error" class="gate-error" aria-live="polite"></div>
+    </div>
+  </div>
   <!-- Nav -->
   <header class="navbar">
     <div class="container nav-inner">
@@ -319,6 +363,47 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Client-side gate: password "sihang"
+    (function() {
+      const PASSWORD = 'sihang';
+      const gate = document.getElementById('gate');
+      const form = document.getElementById('gate-form');
+      const input = document.getElementById('gate-input');
+      const error = document.getElementById('gate-error');
+
+      // Helper to reveal page content
+      function revealContent() {
+        gate.classList.add('hidden');
+        error.textContent = '';
+      }
+
+      // On load: hide page content (visually) behind the white overlay unless previously unlocked globally
+      (function initGate() {
+        try {
+          // Global unlock across all project pages
+          if (localStorage.getItem('projects_unlocked') === 'true') {
+            revealContent();
+          }
+        } catch (e) { /* ignore storage errors */ }
+      })();
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const val = (input.value || '').trim();
+        if (val === PASSWORD) {
+          revealContent();
+          try {
+            // Set a global flag so all project pages recognize unlock
+            localStorage.setItem('projects_unlocked', 'true');
+          } catch (e) {}
+        } else {
+          error.textContent = '密码错误 / Incorrect password';
+          input.focus();
+          input.select();
+        }
+      });
+    })();
   </script>
 </body>
 </html>
