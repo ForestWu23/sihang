@@ -207,10 +207,10 @@
           if (val === PASSWORD) {
             revealContent();
             try {
-              const FIVE_MIN = 5 * 60 * 1000;
+              const THIRTY_MIN = 30 * 60 * 1000;
               localStorage.setItem('projects_unlocked', JSON.stringify({
                 token: 'ok',
-                expires: Date.now() + FIVE_MIN
+                expires: Date.now() + THIRTY_MIN
               }));
             } catch (e) {}
           } else {
