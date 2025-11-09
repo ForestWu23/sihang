@@ -77,6 +77,9 @@
     .hero .subtitle { font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 1.25rem; }
 
     .hero .meta p { margin: .25rem 0; font-weight: 600; color: var(--text-secondary); }
+    /* Improve UX spacing and visual separation for the 3 meta points */
+    .hero .meta { background: rgba(255,255,255,.85); border: 1px solid var(--border-color); border-radius: 14px; box-shadow: var(--shadow-sm); padding: 1rem 1.25rem; }
+    .hero .meta div { background: transparent; }
 
     .achievements { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; margin-top: 1.25rem; }
     .achievement { display: flex; align-items: center; gap: .75rem; padding: 1rem; background: var(--bg-primary); border-radius: 12px; box-shadow: var(--shadow-sm); }
@@ -181,11 +184,20 @@
     <div class="container hero-grid">
       <div>
         <h1>Hi, I'm Sihang Yang <span aria-hidden="true">👋</span></h1>
-        <p class="subtitle">I transform complex problems into elegant, user‑centered design solutions—creating digital experiences that delight users and drive business growth.</p>
-        <div class="meta" aria-label="Profile summary">
-          <p><strong>Senior Product Designer | 8+ years in UX/UI, SaaS, Mobile Apps</strong></p>
-          <p><strong>Design Systems • User Research • Prototyping • Strategy</strong></p>
-          <p><strong>Impact‑driven designer | Currently @ TechFlow • Ex–Google, Airbnb, Spotify</strong></p>
+        <p class="subtitle">I craft user-centered digital experiences that merge strategy, creativity, and functionality—helping brands grow through thoughtful design and measurable results. With a background in graphic, brand, and UX design, I transform complex business goals into elegant, intuitive digital products that engage users and drive growth.</p>
+        <div class="meta" aria-label="Profile summary" style="display:grid; gap:.75rem; margin-top:.5rem;">
+          <div style="display:flex; align-items:flex-start; gap:.6rem;">
+            <span aria-hidden="true" style="font-size:1.1rem; color: var(--accent-color)">•</span>
+            <p style="margin:0;"><strong>Product & UX Designer | 6+ years in UI/UX, Branding, and Visual Design</strong></p>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:.6rem;">
+            <span aria-hidden="true" style="font-size:1.1rem; color: var(--accent-color)">•</span>
+            <p style="margin:0;"><strong>Design Systems • User Research • Prototyping • Product Strategy • Visual Storytelling</strong></p>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:.6rem;">
+            <span aria-hidden="true" style="font-size:1.1rem; color: var(--accent-color)">•</span>
+            <p style="margin:0;"><strong>Founder & Design Director @ VelvetY LLC | Formerly @ Eastside Builders Group, Canature / Thrive Freeze Dry, BuyerFolio AI, Import National</strong></p>
+          </div>
         </div>
 
         <div class="achievements" aria-label="Key achievements">
@@ -292,7 +304,7 @@
           </div>
         </a>
 
-        <a class="card" href="#" data-category="mobile" aria-label="MedConnect: Telemedicine Platform">
+        <a class="card" href="project_nutribites.html" data-category="mobile" aria-label="MedConnect: Telemedicine Platform">
           <div class="thumb" aria-hidden="true">
             <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=1200&h=800&fit=crop&auto=format&dpr=2" alt="Project cover placeholder: mobile app UI" style="width:100%;height:100%;object-fit:cover;">
           </div>

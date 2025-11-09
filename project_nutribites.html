@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nutribites — Project • Sihang Yang</title>
+  <meta name="description" content="Nutribites project visual overview." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    :root{
+      --primary-color:#2563eb;--secondary-color:#1e40af;--accent-color:#f59e0b;--text-primary:#111827;--text-secondary:#4b5563;--text-light:#9ca3af;--bg-primary:#fff;--bg-secondary:#f9fafb;--border-color:#e5e7eb;--shadow-sm:0 1px 2px 0 rgb(0 0 0 / .05);--shadow-md:0 4px 6px -1px rgb(0 0 0 / .1),0 2px 4px -2px rgb(0 0 0 / .1);--shadow-lg:0 10px 15px -3px rgb(0 0 0 / .1),0 4px 6px -4px rgb(0 0 0 / .1);--radius-xl:20px;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6;color:var(--text-primary);background:var(--bg-primary)}
+    .container{max-width:1200px;margin:0 auto;padding:0 2rem}
+
+    /* HEADER / NAV (kept consistent) */
+    .navbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-color)}
+    .nav-inner{height:72px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;color:var(--text-primary);text-decoration:none}
+    .nav-menu{display:flex;gap:1.25rem;list-style:none;margin:0;padding:0}
+    .nav-menu a{position:relative;text-decoration:none;color:var(--text-secondary);font-weight:700}
+    .nav-menu a:hover,.nav-menu a.active{color:var(--primary-color)}
+    .nav-menu a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--primary-color);transition:width .2s ease}
+    .nav-menu a:hover::after,.nav-menu a.active::after{width:100%}
+    .mobile-toggle{display:none;background:none;border:0;font-size:1.5rem;cursor:pointer;color:var(--text-primary)}
+
+    /* HERO wrapper for image */
+    .hero{padding:96px 0 28px;background:linear-gradient(135deg,rgba(37,99,235,.05),rgba(245,158,11,.05))}
+    h1{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,3rem);margin:0 0 .5rem}
+    .lead{font-size:1.125rem;color:var(--text-secondary);margin:0}
+
+    /* Only the long image content */
+    .project-image-wrapper{
+      display:grid;place-items:center;
+      padding:28px 0;
+    }
+    .project-image{
+      width:min(980px, 92vw);
+      height:auto;
+      border-radius:16px;
+      box-shadow:var(--shadow-md);
+    }
+
+    /* CTA section */
+    .section{padding:64px 0}
+    .section.alt{background:var(--bg-secondary)}
+    .cta{margin-top:1.25rem;display:flex;gap:.75rem;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.1rem;border-radius:999px;border:2px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);font-weight:800;text-decoration:none}
+    .btn:hover{border-color:var(--primary-color);color:var(--primary-color);box-shadow:var(--shadow-sm)}
+    .btn.primary{background:var(--primary-color);border-color:var(--primary-color);color:#fff}
+    .btn.primary:hover{background:var(--secondary-color);border-color:var(--secondary-color)}
+
+    /* Password gate overlay */
+    .gate-backdrop {
+      position: fixed; inset: 0;
+      background: #ffffff;
+      display: grid; place-items: center;
+      z-index: 9999;
+    }
+    .gate-panel {
+      width: min(520px, 92vw);
+      background: rgba(255,255,255,.92);
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.25), 0 8px 10px -6px rgb(0 0 0 / 0.2);
+      padding: 24px 20px;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+    .gate-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin: 0 0 .25rem; color: #111827; }
+    .gate-sub { color: #4b5563; margin: 0 0 1rem; }
+    .gate-form { display: grid; grid-template-columns: 1fr auto; gap: .75rem; }
+    .gate-input {
+      padding: .7rem .9rem; border-radius: 12px; border: 2px solid #e5e7eb;
+      font-size: 1rem;
+    }
+    .gate-input:focus { outline: none; border-color: #2563eb; }
+    .gate-btn {
+      appearance: none; border: none; border-radius: 12px;
+      background: #2563eb; color: #fff; font-weight: 700; padding: .7rem 1rem; cursor: pointer;
+    }
+    .gate-btn:hover { background: #1e40af; }
+    .gate-error { color: #b91c1c; font-weight: 600; min-height: 1.25rem; margin-top: .5rem; }
+    .hidden { display: none !important; }
+
+    /* Responsive */
+    @media (max-width:680px){
+      .mobile-toggle{display:inline-grid;place-items:center}
+      .nav-menu{position:fixed;inset:72px 0 auto 0;height:calc(100vh - 72px);background:var(--bg-primary);transform:translateX(100%);transition:transform .2s ease;box-shadow:var(--shadow-lg);flex-direction:column;align-items:flex-start;padding:1.25rem;gap:.75rem}
+      .nav-menu.open{transform:translateX(0)}
+    }
+  </style>
+</head>
+<body>
+  <!-- Password Gate -->
+  <div id="gate" class="gate-backdrop" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+    <div class="gate-panel">
+      <h2 id="gate-title" class="gate-title">Protected Project</h2>
+      <p class="gate-sub">Enter password to view.</p>
+      <form id="gate-form" class="gate-form" autocomplete="off">
+        <input id="gate-input" class="gate-input" type="password" placeholder="Password" aria-label="Password" />
+        <button class="gate-btn" type="submit">Unlock</button>
+      </form>
+      <div id="gate-error" class="gate-error" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a class="logo" href="index.html">Sihang Yang</a>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+      <ul class="nav-menu" id="site-nav" role="menubar">
+        <li role="none"><a role="menuitem" class="active" href="#overview">Project</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO with only the project image -->
+  <section class="hero" id="overview">
+    <div class="container">
+      <h1>NutriBites</h1>
+      <p class="lead">Project visual.</p>
+      <div class="project-image-wrapper">
+        <img class="project-image" src="https://static.wixstatic.com/media/1589e3_372a2d160f21430faf9e563298fca318~mv2.png/v1/fill/w_980,h_9595,al_c,q_95,usm_0.66_1.00_0.01,enc_avif,quality_auto/Portfolio.png" alt="Nutribites project long image" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA only: back to top, back to portfolio, get in touch -->
+  <section class="section alt">
+    <div class="container">
+      <div class="cta">
+        <a class="btn primary" href="#overview"><i class="fa-solid fa-arrow-up"></i> Back to top</a>
+        <a class="btn" href="index.html"><i class="fa-solid fa-rectangle-list"></i> Back to Portfolio</a>
+        <a class="btn" href="mailto:sihang@example.com"><i class="fa-solid fa-envelope"></i> Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="text-align:center;padding:28px 0;background:var(--bg-secondary);color:var(--text-light)">
+    <div class="container">
+      <p style="margin:0">© <span id="year"></span> Sihang Yang — Nutribites</p>
+    </div>
+  </footer>
+
+  <script>
+    // Year stamp
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Mobile menu
+    const toggle = document.getElementById('mobile-toggle');
+    const menu = document.getElementById('site-nav');
+    toggle?.addEventListener('click', () => {
+      const open = !menu.classList.contains('open');
+      menu.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      const icon = toggle.querySelector('i');
+      icon.classList.toggle('fa-bars', !open);
+      icon.classList.toggle('fa-xmark', open);
+    });
+  </script>
+  <script>
+    // Global 5-minute password gate shared across project pages
+    (function() {
+      const PASSWORD = 'sihang';
+      const gate = document.getElementById('gate');
+      const form = document.getElementById('gate-form');
+      const input = document.getElementById('gate-input');
+      const error = document.getElementById('gate-error');
+
+      function revealContent() {
+        if (gate) gate.classList.add('hidden');
+        if (error) error.textContent = '';
+      }
+
+      // On load: check global unlock with 5-minute expiry
+      (function initGate() {
+        try {
+          const raw = localStorage.getItem('projects_unlocked');
+          if (raw) {
+            const data = JSON.parse(raw);
+            const now = Date.now();
+            if (data && typeof data.expires === 'number' && now < data.expires) {
+              revealContent();
+            } else {
+              localStorage.removeItem('projects_unlocked');
+            }
+          }
+        } catch (e) { /* ignore storage errors */ }
+      })();
+
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const val = (input && input.value || '').trim();
+          if (val === PASSWORD) {
+            revealContent();
+            try {
+              const FIVE_MIN = 5 * 60 * 1000;
+              localStorage.setItem('projects_unlocked', JSON.stringify({
+                token: 'ok',
+                expires: Date.now() + FIVE_MIN
+              }));
+            } catch (e) {}
+          } else {
+            if (error) error.textContent = 'Incorrect password';
+            if (input) { input.focus(); input.select(); }
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
