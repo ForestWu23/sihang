@@ -72,22 +72,24 @@
 
     /* Hero */
     .hero { min-height: 100vh; display: grid; place-items: center; padding: 120px 0 80px; }
-    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.2; margin: 0 0 1rem; }
-    .hero .subtitle { font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 1.25rem; }
+    .hero-grid { display: grid; grid-template-columns: 1.35fr .65fr; gap: 5rem; align-items: center; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin: 0 0 1rem; max-width: 72ch; }
+    .hero .subtitle { font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 1.25rem; max-width: 88ch; }
 
     .hero .meta p { margin: .25rem 0; font-weight: 600; color: var(--text-secondary); }
-    /* Improve UX spacing and visual separation for the 3 meta points */
-    .hero .meta { background: rgba(255,255,255,.85); border: 1px solid var(--border-color); border-radius: 14px; box-shadow: var(--shadow-sm); padding: 1rem 1.25rem; }
-    .hero .meta div { background: transparent; }
+    /* Restore original style but add better spacing between long paragraphs */
+    .hero .meta { margin-top:.5rem; }
+    .hero .meta p + p { margin-top: 1rem; }
+    /* allow profile summary to stretch wider */
+    .hero .meta { max-width: 88ch; }
 
     .achievements { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; margin-top: 1.25rem; }
     .achievement { display: flex; align-items: center; gap: .75rem; padding: 1rem; background: var(--bg-primary); border-radius: 12px; box-shadow: var(--shadow-sm); }
     .achievement .icon { font-size: 1.25rem; color: var(--primary-color); }
-    .achievement .num { font-size: 1.5rem; font-weight: 800; color: var(--primary-color); }
+    .achievement .num { font-size: 1.75rem; font-weight: 800; color: var(--primary-color); line-height: 1; }
 
-    .hero-media { position: relative; display: grid; place-items: center; }
-    .avatar { width: 300px; height: 300px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; border: 8px solid var(--bg-primary); box-shadow: var(--shadow-xl); }
+    .hero-media { position: relative; display: grid; place-items: center; justify-items: end; }
+    .avatar { width: 340px; height: 340px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; border: 8px solid var(--bg-primary); box-shadow: var(--shadow-xl); transform: translateX(60px); }
 
     .float { position: absolute; font-size: 1.75rem; color: var(--primary-color); opacity: .25; animation: float 6s ease-in-out infinite; }
     .float.f1 { top: 10%; left: 8%; animation-delay: 0s; }
@@ -184,49 +186,46 @@
     <div class="container hero-grid">
       <div>
         <h1>Hi, I'm Sihang Yang <span aria-hidden="true">👋</span></h1>
-        <p class="subtitle">I craft user-centered digital experiences that merge strategy, creativity, and functionality—helping brands grow through thoughtful design and measurable results. With a background in graphic, brand, and UX design, I transform complex business goals into elegant, intuitive digital products that engage users and drive growth.</p>
-        <div class="meta" aria-label="Profile summary" style="display:grid; gap:.75rem; margin-top:.5rem;">
-          <div style="display:flex; align-items:flex-start; gap:.6rem;">
-            <span aria-hidden="true" style="font-size:1.1rem; color: var(--accent-color)">•</span>
-            <p style="margin:0;"><strong>Product & UX Designer | 6+ years in UI/UX, Branding, and Visual Design</strong></p>
-          </div>
-          <div style="display:flex; align-items:flex-start; gap:.6rem;">
-            <span aria-hidden="true" style="font-size:1.1rem; color: var(--accent-color)">•</span>
-            <p style="margin:0;"><strong>Design Systems • User Research • Prototyping • Product Strategy • Visual Storytelling</strong></p>
-          </div>
-          <div style="display:flex; align-items:flex-start; gap:.6rem;">
-            <span aria-hidden="true" style="font-size:1.1rem; color: var(--accent-color)">•</span>
-            <p style="margin:0;"><strong>Founder & Design Director @ VelvetY LLC | Formerly @ Eastside Builders Group, Canature / Thrive Freeze Dry, BuyerFolio AI, Import National</strong></p>
-          </div>
+        <p class="subtitle">I craft user-centered digital experiences that merge strategy, creativity, and functionality—helping brands grow through thoughtful design and measurable results. With a background spanning UX/UI, branding, and interactive media, I transform complex business goals into elegant, intuitive design systems that engage users and drive performance.</p>
+        <div class="meta" aria-label="Profile summary" style="margin-top:.5rem;">
+          <p style="margin:0 0 .9rem; font-weight:600; color: var(--text-secondary);">
+            <strong>Product & UX Designer | 6+ years in UI/UX, Branding, and Visual Design</strong>
+          </p>
+          <p style="margin:0 0 .9rem; font-weight:600; color: var(--text-secondary);">
+            <strong>Design Systems • User Research • Prototyping • Product Strategy • Visual Storytelling</strong>
+          </p>
+          <p style="margin:0; font-weight:600; color: var(--text-secondary);">
+            <strong>Founder & Design Director @ VelvetY LLC | Formerly @ Eastside Builders Group, Thrive Freeze Dry, BuyerFolio AI, Import National</strong>
+          </p>
         </div>
 
         <div class="achievements" aria-label="Key achievements">
-          <div class="achievement" aria-label="12+ Design Awards">
-            <i class="fas fa-trophy icon" aria-hidden="true"></i>
+          <div class="achievement" aria-label="30+ Branding & UX Design Projects">
+            <i class="fas fa-award icon" aria-hidden="true"></i>
             <div>
-              <div class="num">12+</div>
-              <div>Design Awards</div>
+              <div class="num">30+</div>
+              <div>Branding & UX Design Projects</div>
             </div>
           </div>
-          <div class="achievement" aria-label="50+ Product Launches">
+          <div class="achievement" aria-label="10+ Product & Website Launches">
             <i class="fas fa-rocket icon" aria-hidden="true"></i>
             <div>
-              <div class="num">50+</div>
-              <div>Product Launches</div>
+              <div class="num">10+</div>
+              <div>Product & Website Launches</div>
             </div>
           </div>
-          <div class="achievement" aria-label="2M+ Users Impacted">
-            <i class="fas fa-users icon" aria-hidden="true"></i>
+          <div class="achievement" aria-label="Cross-industry Clients">
+            <i class="fas fa-briefcase icon" aria-hidden="true"></i>
             <div>
-              <div class="num">2M+</div>
-              <div>Users Impacted</div>
+              <div class="num">4+</div>
+              <div>Real Estate • Mortgage • Food • Technology</div>
             </div>
           </div>
-          <div class="achievement" aria-label="85% Conversion Boost">
+          <div class="achievement" aria-label="28%+ Average Conversion Growth">
             <i class="fas fa-chart-line icon" aria-hidden="true"></i>
             <div>
-              <div class="num">85%</div>
-              <div>Conversion Boost</div>
+              <div class="num">28%+</div>
+              <div>Average Conversion Growth Across Projects</div>
             </div>
           </div>
         </div>
