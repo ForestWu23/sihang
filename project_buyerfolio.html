@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BuyerFolio — Case Study • Sihang Yang</title>
+  <meta name="description" content="UX/UI case study for BuyerFolio seller-side app: onboarding, AI matching, trust-first design, dashboards, and outcomes." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    :root{
+      --primary-color:#2563eb;--secondary-color:#1e40af;--accent-color:#f59e0b;--text-primary:#111827;--text-secondary:#4b5563;--text-light:#9ca3af;--bg-primary:#fff;--bg-secondary:#f9fafb;--border-color:#e5e7eb;--shadow-sm:0 1px 2px 0 rgb(0 0 0 / .05);--shadow-md:0 4px 6px -1px rgb(0 0 0 / .1),0 2px 4px -2px rgb(0 0 0 / .1);--shadow-lg:0 10px 15px -3px rgb(0 0 0 / .1),0 4px 6px -4px rgb(0 0 0 / .1);--radius-xl:20px;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6;color:var(--text-primary);background:var(--bg-primary)}
+    .container{max-width:1200px;margin:0 auto;padding:0 2rem}
+
+    /* HEADER / NAV (matching project1.html) */
+    .navbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-color)}
+    .nav-inner{height:72px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;color:var(--text-primary);text-decoration:none}
+    .nav-menu{display:flex;gap:1.25rem;list-style:none;margin:0;padding:0}
+    .nav-menu a{position:relative;text-decoration:none;color:var(--text-secondary);font-weight:700}
+    .nav-menu a:hover,.nav-menu a.active{color:var(--primary-color)}
+    .nav-menu a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--primary-color);transition:width .2s ease}
+    .nav-menu a:hover::after,.nav-menu a.active::after{width:100%}
+    .mobile-toggle{display:none;background:none;border:0;font-size:1.5rem;cursor:pointer;color:var(--text-primary)}
+
+    /* HERO */
+    .hero{padding:96px 0 28px;background:linear-gradient(135deg,rgba(37,99,235,.05),rgba(245,158,11,.05))}
+    h1{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,3rem);margin:0 0 .5rem}
+    .lead{font-size:1.125rem;color:var(--text-secondary);margin:0}
+
+    .meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.25rem}
+    .meta{background:var(--bg-primary);border:1px solid var(--border-color);border-radius:12px;box-shadow:var(--shadow-sm);padding:1rem}
+    .meta .label{font-size:.8rem;color:var(--text-light);font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+    .meta .value{font-weight:900;margin-top:.25rem}
+
+    .hero-gallery{display:grid;grid-template-columns:2fr 1fr;gap:1rem;margin:28px 0 8px}
+    .hero-gallery img{width:100%;height:100%;object-fit:cover;border-radius:16px;box-shadow:var(--shadow-md)}
+    .stack{display:grid;grid-template-rows:1fr 1fr;gap:1rem}
+
+    /* SECTIONS */
+    .section{padding:64px 0}
+    .section.alt{background:var(--bg-secondary)}
+    .section h2{font-family:'Playfair Display',serif;font-size:1.75rem;margin:0 0 .75rem}
+    .two-col{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:start}
+    .panel{background:var(--bg-primary);border:1px solid var(--border-color);border-radius:16px;box-shadow:var(--shadow-sm);padding:1.25rem}
+
+    .callout{border-left:4px solid var(--accent-color);background:#fff7ed;color:#7c2d12;padding:1rem 1.25rem;border-radius:8px}
+
+    .img-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:24px 0}
+    .img-row img{width:100%;border-radius:14px;box-shadow:var(--shadow-sm)}
+
+    .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
+    .kpi .card{background:var(--bg-primary);border:1px solid var(--border-color);border-radius:16px;box-shadow:var(--shadow-sm);padding:1.25rem;text-align:center}
+    .kpi .num{font-weight:900;font-size:1.75rem;color:var(--primary-color)}
+    .kpi .cap{color:var(--text-secondary)}
+
+    .cta{margin-top:1.25rem;display:flex;gap:.75rem;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.1rem;border-radius:999px;border:2px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);font-weight:800;text-decoration:none}
+    .btn:hover{border-color:var(--primary-color);color:var(--primary-color);box-shadow:var(--shadow-sm)}
+    .btn.primary{background:var(--primary-color);border-color:var(--primary-color);color:#fff}
+    .btn.primary:hover{background:var(--secondary-color);border-color:var(--secondary-color)}
+
+    /* Password gate */
+    .gate-backdrop { position: fixed; inset: 0; background: #ffffff; display: grid; place-items: center; z-index: 9999; }
+    .gate-panel { width: min(520px, 92vw); background: rgba(255,255,255,.92); border: 1px solid #e5e7eb; border-radius: 16px; box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.25), 0 8px 10px -6px rgb(0 0 0 / 0.2); padding: 24px 20px; }
+    .gate-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin: 0 0 .25rem; color: #111827; }
+    .gate-sub { color: #4b5563; margin: 0 0 1rem; }
+    .gate-form { display: grid; grid-template-columns: 1fr auto; gap: .75rem; }
+    .gate-input { padding: .7rem .9rem; border-radius: 12px; border: 2px solid #e5e7eb; font-size: 1rem; }
+    .gate-input:focus { outline: none; border-color: #2563eb; }
+    .gate-btn { appearance: none; border: none; border-radius: 12px; background: #2563eb; color: #fff; font-weight: 700; padding: .7rem 1rem; cursor: pointer; }
+    .gate-btn:hover { background: #1e40af; }
+    .gate-error { color: #b91c1c; font-weight: 600; min-height: 1.25rem; margin-top: .5rem; }
+    .hidden { display: none !important; }
+
+    /* RESPONSIVE */
+    @media (max-width:980px){.meta-grid{grid-template-columns:repeat(2,1fr)}.hero-gallery{grid-template-columns:1fr}.two-col{grid-template-columns:1fr}.img-row{grid-template-columns:1fr 1fr}}
+    @media (max-width:680px){.mobile-toggle{display:inline-grid;place-items:center}.nav-menu{position:fixed;inset:72px 0 auto 0;height:calc(100vh - 72px);background:var(--bg-primary);transform:translateX(100%);transition:transform .2s ease;box-shadow:var(--shadow-lg);flex-direction:column;align-items:flex-start;padding:1.25rem;gap:.75rem}.nav-menu.open{transform:translateX(0)}.img-row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <!-- Password Gate (same behavior as project1.html) -->
+  <div id="gate" class="gate-backdrop" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+    <div class="gate-panel">
+      <h2 id="gate-title" class="gate-title">Protected Case Study</h2>
+      <p class="gate-sub">Enter password to view.</p>
+      <form id="gate-form" class="gate-form" autocomplete="off">
+        <input id="gate-input" class="gate-input" type="password" placeholder="Password" aria-label="Password" />
+        <button class="gate-btn" type="submit">Unlock</button>
+      </form>
+      <div id="gate-error" class="gate-error" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- HEADER (matching project1.html) -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a class="logo" href="index.html">Sihang Yang</a>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+      <ul class="nav-menu" id="site-nav" role="menubar">
+        <li role="none"><a role="menuitem" href="index.html">Home</a></li>
+        <li role="none"><a role="menuitem" class="active" href="#overview">Project</a></li>
+        <li role="none"><a role="menuitem" href="#research">Research</a></li>
+        <li role="none"><a role="menuitem" href="#results">Results</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO / OVERVIEW -->
+  <section class="hero" id="overview">
+    <div class="container">
+      <h1>BuyerFolio — Seller-side App Design</h1>
+      <p class="lead">An AI-driven real estate platform redesign for sellers: guided onboarding, trust-first interactions, and AI-powered co-buyer matching to streamline listing and negotiations.</p>
+
+      <div class="meta-grid" role="list">
+        <div class="meta" role="listitem"><div class="label">Role</div><div class="value">UI/UX Designer</div></div>
+        <div class="meta" role="listitem"><div class="label">Project Type</div><div class="value">B2C Real Estate Platform (Startup, Remote)</div></div>
+        <div class="meta" role="listitem"><div class="label">Tools</div><div class="value">Figma • Notion • Adobe Illustrator • Photoshop</div></div>
+        <div class="meta" role="listitem"><div class="label">Focus</div><div class="value">Onboarding • AI Matching • Trust • Dashboard</div></div>
+      </div>
+
+      <!-- Use the local cover image to represent BuyerFolio -->
+      <div class="hero-gallery" aria-label="Project visuals">
+        <img src="photos/buyerFolio/cover.png" alt="BuyerFolio seller-side app cover" />
+        <div class="stack">
+          <img src="https://static.wixstatic.com/media/1589e3_99eca4f983364575aa14a6ce151b274a~mv2.png/v1/fill/w_636,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%2010%20copy%206.png" alt="Seller onboarding screen" />
+          <img src="https://static.wixstatic.com/media/1589e3_f2af81112f194dc69da20d9fa5f5f393~mv2.png/v1/fill/w_636,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%2010%20copy%205.png" alt="AI match overview" />
+        </div>
+      </div>
+
+      <div class="kpi" aria-label="Key outcomes">
+        <div class="card"><div class="num">+ Improved</div><div class="cap">Seller confidence</div></div>
+        <div class="card"><div class="num">+ Faster</div><div class="cap">Compatible matches via AI</div></div>
+        <div class="card"><div class="num">↑ Trust</div><div class="cap">Verified profiles & scores</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHALLENGE & GOALS -->
+  <section class="section">
+    <div class="container two-col">
+      <div class="panel">
+        <h2>The Problem</h2>
+        <p>Many sellers—especially elderly homeowners—struggle with fragmented tools, unclear progress, and overwhelming decisions. Existing buyer-focused flows caused confusion and drop-off when sellers tried to adapt them.</p>
+        <div class="callout"><strong>Need:</strong> A seller-dedicated experience that improves clarity, trust, and task success while integrating with existing app architecture.</div>
+      </div>
+      <div class="panel">
+        <h2>Goals</h2>
+        <ul>
+          <li>Step-by-step onboarding for clarity and confidence.</li>
+          <li>AI-powered matching to enhance compatibility (Folio/Home Score).</li>
+          <li>Seller dashboard for transparent progress tracking.</li>
+          <li>Trust-first features: verification, agreements, clear microcopy.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH & INSIGHTS -->
+  <section class="section alt" id="research">
+    <div class="container">
+      <h2>Design Strategy</h2>
+      <div class="two-col">
+        <div class="panel">
+          <p>Human-centered, trust-driven, and AI-supported approach tailored for elderly homeowners and co-living arrangements.</p>
+          <ul>
+            <li><strong>Guided onboarding:</strong> Welcoming, progressive disclosure, collect property & personal info gradually.</li>
+            <li><strong>AI matching:</strong> Folio Score and Home Score recommend compatible co-buyers to reduce friction.</li>
+            <li><strong>Progress transparency:</strong> Centralized dashboard, clear prompts, large-touch UI elements.</li>
+            <li><strong>Trust-first:</strong> Verified profiles, community agreements, transparent communication tools.</li>
+            <li><strong>Modular tools:</strong> Offer rooms, messaging, scheduling within the platform.</li>
+            <li><strong>Scalable design:</strong> Modular sections support legal templates, finance tools, neighborhood insights.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <!-- Image row using representative Wix images retained from original content -->
+          <div class="img-row" aria-label="Artifacts">
+            <img src="https://static.wixstatic.com/media/1589e3_5f8aa14cdefc474f8b1922291786524d~mv2.png/v1/fill/w_636,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%2010%20copy%203.png" alt="BuyerFolio seller flow mock 1" />
+            <img src="https://static.wixstatic.com/media/1589e3_6aebc0a6f9094cbfa46f40cb76c138dd~mv2.png/v1/fill/w_636,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%2010%20copy%209.png" alt="BuyerFolio seller flow mock 2" />
+            <img src="https://static.wixstatic.com/media/1589e3_0e51a30878d842efaa8a5398ba951fcd~mv2.png/v1/fill/w_636,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%2010%20copy%204.png" alt="BuyerFolio seller flow mock 3" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="section" id="solution">
+    <div class="container">
+      <h2>Solution Highlights</h2>
+      <div class="two-col" style="margin-top:1rem">
+        <div class="panel">
+          <h3>Onboarding & Trust</h3>
+          <p>Clear steps, welcoming copy, and verified profiles increase confidence. Agreements and transparent policy microcopy reduce ambiguity.</p>
+        </div>
+        <div class="panel">
+          <h3>AI Matching & Negotiation</h3>
+          <p>Folio/Home scores drive better compatibility. Offer rooms, messaging, and scheduling keep conversations within the platform.</p>
+        </div>
+      </div>
+      <div class="img-row" style="margin-top:1rem">
+        <img src="https://static.wixstatic.com/media/1589e3_56d46a735e6d4605bc0a73188d1fe46c~mv2.png/v1/fill/w_636,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%2010%20copy%208.png" alt="BuyerFolio UI mocks A" />
+        <img src="https://static.wixstatic.com/media/1589e3_b50d7166228840879292c3a592c2a244~mv2.png/v1/fill/w_636,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%2010%20copy%2012.png" alt="BuyerFolio UI mocks B" />
+        <img src="https://static.wixstatic.com/media/1589e3_ee2d4e4bb50b4563a9d069de8934dc6e~mv2.png/v1/fill/w_636,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Artboard%2010%20copy%2011.png" alt="BuyerFolio UI mocks C" />
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="section alt" id="results">
+    <div class="container">
+      <h2>The Result</h2>
+      <div class="kpi">
+        <div class="card"><div class="num">↑ Accessibility</div><div class="cap">Simplified steps & larger touch targets</div></div>
+        <div class="card"><div class="num">↑ Transparency</div><div class="cap">Dashboard progress & clear prompts</div></div>
+        <div class="card"><div class="num">↑ Matching</div><div class="cap">AI-driven compatible co-buyers</div></div>
+      </div>
+
+      <div class="two-col" style="margin-top:1rem">
+        <div class="panel">
+          <h3 style="margin-top:0">Impact</h3>
+          <ul>
+            <li>Reduced confusion for sellers with a dedicated flow.</li>
+            <li>Improved decision-making via Folio/Home scores.</li>
+            <li>Negotiations inside platform with structured offer rooms.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3 style="margin-top:0">Future-ready</h3>
+          <ul>
+            <li>Modules for legal templates and financial planning.</li>
+            <li>Neighborhood insights and community agreements.</li>
+            <li>Scalable information architecture for new features.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta">
+        <a class="btn primary" href="#overview"><i class="fa-solid fa-arrow-up"></i> Back to top</a>
+        <a class="btn" href="index.html"><i class="fa-solid fa-rectangle-list"></i> Back to Portfolio</a>
+        <a class="btn" href="mailto:sihang@example.com"><i class="fa-solid fa-envelope"></i> Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (matching project1.html style) -->
+  <footer style="text-align:center;padding:28px 0;background:var(--bg-secondary);color:var(--text-light)">
+    <div class="container">
+      <p style="margin:0">© <span id="year"></span> Sihang Yang — BuyerFolio</p>
+    </div>
+  </footer>
+
+  <!-- Scripts: same menu and gate behavior as project1.html -->
+  <script>
+    // Year stamp
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Mobile menu
+    const toggle = document.getElementById('mobile-toggle');
+    const menu = document.getElementById('site-nav');
+    toggle?.addEventListener('click', () => {
+      const open = !menu.classList.contains('open');
+      menu.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      const icon = toggle.querySelector('i');
+      icon.classList.toggle('fa-bars', !open);
+      icon.classList.toggle('fa-xmark', open);
+    });
+  </script>
+  <script>
+    // Global password gate (same as project1.html)
+    (function() {
+      const PASSWORD = 'sihang';
+      const gate = document.getElementById('gate');
+      const form = document.getElementById('gate-form');
+      const input = document.getElementById('gate-input');
+      const error = document.getElementById('gate-error');
+
+      function revealContent() {
+        if (gate) gate.classList.add('hidden');
+        if (error) error.textContent = '';
+      }
+
+      // On load: check global unlock with expiry
+      (function initGate() {
+        try {
+          const raw = localStorage.getItem('projects_unlocked');
+          if (raw) {
+            const data = JSON.parse(raw);
+            const now = Date.now();
+            if (data && typeof data.expires === 'number' && now < data.expires) {
+              revealContent();
+            } else {
+              localStorage.removeItem('projects_unlocked');
+            }
+          }
+        } catch (e) { /* ignore storage errors */ }
+      })();
+
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const val = (input && input.value || '').trim();
+          if (val === PASSWORD) {
+            revealContent();
+            try {
+              const THIRTY_MIN = 30 * 60 * 1000;
+              localStorage.setItem('projects_unlocked', JSON.stringify({
+                token: 'ok',
+                expires: Date.now() + THIRTY_MIN
+              }));
+            } catch (e) {}
+          } else {
+            if (error) error.textContent = 'Incorrect password';
+            if (input) { input.focus(); input.select(); }
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
